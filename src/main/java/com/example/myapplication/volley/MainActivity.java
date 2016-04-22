@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.volley;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -28,9 +28,8 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
-import com.example.myapplication.api.BitmapCache;
-import com.example.myapplication.api.VolleyInterface;
-import com.example.myapplication.api.VolleyRequest;
+import com.example.myapplication.MyApplication;
+import com.example.myapplication.R;
 
 import org.json.JSONObject;
 
@@ -40,6 +39,10 @@ import java.util.Map;
 import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
 
+/**
+ * Volley的使用
+ *volley加载图片
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -118,25 +121,23 @@ public class MainActivity extends AppCompatActivity
         bt1.setOnClickListener(this);
         bt2.setOnClickListener(this);
         bt3.setOnClickListener(this);
-
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_1:
-                volley_get();
+                volleyJsonGet();
+//                volley_get();
                 return;
             case R.id.bt_2:
-//                volleyGet();
+//                volleyJsonGet();
                 volletGet();
                 break;
             case R.id.bt_3:
-                volleyPost();
+                volleyPostString();
                 break;
             default:
-
                 break;
         }
     }
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void volleyPost() {
+    private void volleyPostString() {
 
         StringRequest request=new StringRequest(POST, "http://apis.juhe.cn/mobile/get?", new Response.Listener<String>() {
             @Override
@@ -189,7 +190,8 @@ public class MainActivity extends AppCompatActivity
         MyApplication.getHttpQueses().add(request);
 
     }
-    private void volleyGet() {
+
+    private void volleyJsonGet() {
         JsonObjectRequest requset = new JsonObjectRequest(GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -253,6 +255,8 @@ public class MainActivity extends AppCompatActivity
         super.onStop();
         MyApplication.getHttpQueses().cancelAll("abcGet");
     }
+
+
 
 
 

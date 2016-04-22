@@ -1,4 +1,4 @@
-package com.example.myapplication.api;
+package com.example.myapplication.volley;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;

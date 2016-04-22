@@ -53,6 +53,14 @@ public class ViewHolder {
     }
 
     /**
+     * 返回holder的item索引
+     * @return
+     */
+    public int getPosition() {
+        return mPosition;
+    }
+
+    /**
      * 通过viewId获取控件
      * @param viewId
      * @param <T>
