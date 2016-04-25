@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:descendantFocusability="blocksDescendants"
-    tools:context=".adapter.ListActivity">
+    tools:context=".adapter.MyListActivity">
 
     <CheckBox
         android:layout_width="wrap_content"

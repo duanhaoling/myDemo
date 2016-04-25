@@ -10,45 +10,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".volley.MainActivity"
+    tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <LinearLayout
+    <fragment
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:name="com.example.myapplication.MyListFragment"
+        android:id="@+id/fragment"
+        tools:layout="@layout/abc_activity_chooser_view_list_item"></fragment>
 
-        <Button
-            android:id="@+id/bt_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello" />
-
-        <Button
-            android:id="@+id/bt_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="World" />
-
-        <Button
-            android:id="@+id/bt_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="todo" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/net_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <WebView
-        android:id="@+id/wv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
 </LinearLayout>

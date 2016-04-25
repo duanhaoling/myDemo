@@ -2,17 +2,8 @@ package com.example.myapplication.volley;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -40,19 +31,16 @@ import static com.android.volley.Request.Method.GET;
 import static com.android.volley.Request.Method.POST;
 
 /**
- * Volley的使用
- *volley加载图片
+ * Created by ldh on 2016/4/25 0025.
  */
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-
+public class VolleyActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_volley);
         initView();
-        assignViews();
+
         final String imgUrl = "http://www.baidu.com/img/bdlogo.png";
         //volley第一种加载图片的方式
         useImageRequest(imgUrl);
@@ -60,6 +48,10 @@ public class MainActivity extends AppCompatActivity
 //        useImageLoader(imgUrl);
         //第三种volley加载图片的方式
         useNetWorkImageView(imgUrl);
+    }
+
+    private void initView() {
+        assignViews();
     }
 
     /**
@@ -151,12 +143,12 @@ public class MainActivity extends AppCompatActivity
         JsonObjectRequest joRequest=new JsonObjectRequest(Request.Method.POST, "http://apis.juhe.cn/mobile/get?", jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(MainActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         joRequest.setTag("jsonPost");
@@ -169,12 +161,12 @@ public class MainActivity extends AppCompatActivity
         StringRequest request=new StringRequest(POST, "http://apis.juhe.cn/mobile/get?", new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, s, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(MainActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
@@ -195,14 +187,14 @@ public class MainActivity extends AppCompatActivity
         JsonObjectRequest requset = new JsonObjectRequest(GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                Toast.makeText(MainActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("TAG",jsonObject.toString());
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(MainActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
                 Log.e("TAG", volleyError.getMessage(), volleyError);
             }
         });
@@ -217,7 +209,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public void onResponse(String s) {
-            Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+            Toast.makeText(VolleyActivity.this, s, Toast.LENGTH_SHORT).show();
         }
     };
     Response.ErrorListener errorListener = new Response.ErrorListener() {
@@ -225,7 +217,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onErrorResponse(VolleyError volleyError) {
             Log.e("TAG", volleyError.getMessage(), volleyError);
-            Toast.makeText(MainActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(VolleyActivity.this, volleyError.toString(), Toast.LENGTH_SHORT).show();
         }
     };
     private void volley_get() {
@@ -241,12 +233,12 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onMySuccess(String result) {
-                Toast.makeText(MainActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onMyError(VolleyError error) {
-                Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(VolleyActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -254,95 +246,5 @@ public class MainActivity extends AppCompatActivity
     protected void onStop() {
         super.onStop();
         MyApplication.getHttpQueses().cancelAll("abcGet");
-    }
-
-
-
-
-
-
-
-
-    private void initView() {
-        //初始化toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //初始化悬浮按钮
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        //初始化侧边栏
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            jsonVolleyPost();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

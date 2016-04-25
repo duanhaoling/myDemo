@@ -16,7 +16,7 @@ import com.example.myapplication.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MyListActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private MyListView mListView;
     private List<Bean> mDatas;

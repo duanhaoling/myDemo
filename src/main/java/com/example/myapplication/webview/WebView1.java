@@ -1,13 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.webview;
 
-
-import android.content.DialogInterface;
-
-import java.io.FileOutputStream;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Picture;
@@ -21,6 +18,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.myapplication.R;
+
+import java.io.FileOutputStream;
 
 /**
  * 在WebView的设计中，不是什么任务都由WebView类完成的，辅助的类完全其它辅助性的工作，WebViewy主要负责解析、渲染。
@@ -41,7 +42,7 @@ public class WebView1 extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main);
+        setContentView(R.layout.activity_webview);
 
 // 定义UI组件
         Button b1 = (Button) findViewById(R.id.bt_1);
