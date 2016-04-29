@@ -11,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.myapplication.adapter.MyListActivity;
+import com.example.myapplication.animation.AnimationActivity;
 import com.example.myapplication.timer.TimerDemoActivity;
 import com.example.myapplication.volley.VolleyActivity;
+import com.example.myapplication.webview.WebViewDemo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +31,7 @@ public class MyListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         List<String> mDatas = new ArrayList<String>();
-        String[] ss=new String[]{"MyListActivity","TimerDemoActivity","VolleyActivity"};
+        String[] ss=new String[]{"MyListActivity","TimerDemoActivity","VolleyActivity","AnimationActivity","WebViewDemo"};
         mDatas.addAll(Arrays.asList(ss));
 
         mContext = getActivity();
@@ -60,6 +62,15 @@ public class MyListFragment extends ListFragment {
             case 2:
                 intent.setClass(mContext, VolleyActivity.class);
                 break;
+            case 3:
+                intent.setClass(mContext,AnimationActivity.class);
+                break;
+            case 4:
+                intent.setClass(mContext,WebViewDemo.class);
+                break;
+            case 5:
+            case 6:
+            case 7:
         }
         mContext.startActivity(intent);
         super.onListItemClick(l, v, position, id);

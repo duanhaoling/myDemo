@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.myapplication.MyApplication;
 import com.example.myapplication.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -161,7 +162,8 @@ public class VolleyActivity extends AppCompatActivity implements View.OnClickLis
         StringRequest request=new StringRequest(POST, "http://apis.juhe.cn/mobile/get?", new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
-                Toast.makeText(VolleyActivity.this, s, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(VolleyActivity.this, s, Toast.LENGTH_SHORT).show();
+                Log.d("Volley", s);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -187,8 +189,18 @@ public class VolleyActivity extends AppCompatActivity implements View.OnClickLis
         JsonObjectRequest requset = new JsonObjectRequest(GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                Toast.makeText(VolleyActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
-                Log.d("TAG",jsonObject.toString());
+//                Toast.makeText(VolleyActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("Volley", jsonObject.toString());
+                //获取jsonObject的数据方式一，找不到返回空字符串
+                jsonObject.optString("aa");
+                //方式二，找不到抛异常
+                try {
+                    Toast.makeText(VolleyActivity.this, jsonObject.getString("reason"), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("TAG", jsonObject.toString());
 
             }
         }, new Response.ErrorListener() {
@@ -233,7 +245,8 @@ public class VolleyActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onMySuccess(String result) {
-                Toast.makeText(VolleyActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(VolleyActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("volley", result.toString());
             }
 
             @Override

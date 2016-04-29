@@ -3,10 +3,10 @@ package com.example.myapplication.timer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.example.myapplication.MyApplication;
 import com.example.myapplication.R;
 
 import java.util.Timer;
@@ -27,7 +27,17 @@ public class TimerDemoActivity extends AppCompatActivity {
         timer = new Timer();
         timer.schedule(task,1000,1000);
 
+        initActionBar();
     }
+    private void initActionBar() {
+        ActionBar actionBar =getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+        }
+    }
+
     final Handler handler = new Handler(){
 
         @Override
@@ -95,9 +105,4 @@ public class TimerDemoActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStop() {
-        MyApplication.getHttpQueses().cancelAll("MY Tag");
-        super.onStop();
-    }
 }
