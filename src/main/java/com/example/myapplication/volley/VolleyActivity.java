@@ -19,6 +19,7 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
+import com.example.myapplication.BuildConfig;
 import com.example.myapplication.MyApplication;
 import com.example.myapplication.R;
 
@@ -192,7 +193,7 @@ public class VolleyActivity extends AppCompatActivity implements View.OnClickLis
 //                Toast.makeText(VolleyActivity.this, jsonObject.toString(), Toast.LENGTH_SHORT).show();
                 Log.d("Volley", jsonObject.toString());
                 //获取jsonObject的数据方式一，找不到返回空字符串
-                jsonObject.optString("aa");
+                if (BuildConfig.DEBUG) Log.d("VolleyActivity", jsonObject.optString("error_code"));
                 //方式二，找不到抛异常
                 try {
                     Toast.makeText(VolleyActivity.this, jsonObject.getString("reason"), Toast.LENGTH_SHORT).show();

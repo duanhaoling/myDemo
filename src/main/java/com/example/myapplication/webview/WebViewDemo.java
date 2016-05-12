@@ -191,8 +191,6 @@ public class WebViewDemo extends AppCompatActivity {
             builder.show();
 
             return true;
-
-
         }
 
         @Override
