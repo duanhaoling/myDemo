@@ -5,4 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="webviewdemo2">WebViewDemo2</string>
+    <string name="loading">加载中…</string>
+    <string name="copy_success">复制成功</string>
+
 </resources>

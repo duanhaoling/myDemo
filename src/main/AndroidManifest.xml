@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+    package="com.example.mydemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".MyApplication"
+        android:name="com.example.mydemo.AppContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.mydemo.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".webview.WebViewDemo" ></activity>
-
-        <activity android:name=".volley.VolleyActivity" ></activity>
-
+        <activity android:name="com.example.mydemo.webview.WebViewDemo" />
+        <activity android:name="com.example.mydemo.webview.WebViewDemo2" />
+        <activity android:name="com.example.mydemo.volley.VolleyActivity" />
         <activity
-            android:name=".adapter.MyListActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".timer.TimerDemoActivity"></activity>
-
-        <activity android:name= ".animation.AnimationActivity"></activity>
+            android:name="com.example.mydemo.adapter.MyListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.mydemo.timer.TimerDemoActivity" />
+        <activity android:name="com.example.mydemo.animation.AnimationActivity" />
+        <activity android:name="com.example.mydemo.widget.test.WidgetActivity"></activity>
     </application>
 
 </manifest>

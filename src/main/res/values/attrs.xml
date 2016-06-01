@@ -5,4 +5,8 @@
         <attr name="allowWidthFull" format="boolean" />
         <attr name="disableViewPager" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="Follow">
+        <attr name="target" format="reference"/>
+    </declare-styleable>
 </resources>

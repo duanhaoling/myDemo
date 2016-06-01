@@ -13,11 +13,14 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.myapplication.MyListFragment"
+        android:name="com.example.mydemo.MyListFragment"
         android:id="@+id/fragment"
-        tools:layout="@layout/abc_activity_chooser_view_list_item"></fragment>
+        tools:layout="@layout/abc_activity_chooser_view_list_item"/>
+
+
 
 </LinearLayout>
