@@ -8,5 +8,7 @@
     <string name="webviewdemo2">WebViewDemo2</string>
     <string name="loading">加载中…</string>
     <string name="copy_success">复制成功</string>
+    <string name="person_name">黄美姬</string>
+    <string name="person_title">车模</string>
 
 </resources>

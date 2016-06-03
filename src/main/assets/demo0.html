@@ -55,8 +55,8 @@
             <h1>Android via Interface</h1>
         </div><!-- /header -->
         <div data-role="content">
-            <button value="say hello" onclick="showAndroidToast('Hello,Android!')" data-theme="e"></button>
-            <button value="get json data" onclick="getjsonData()" data-theme="e"></button>
+            <h2 onclick="window.demo.onJsCallAndroid()" data-theme="e">say hello!</h2>
+            <a onclick="window.demo.onJsCallAndroid()">click me!</a>
         </div><!-- /content -->
         <div data-role="collapsible" data-theme="c" data-content-theme="f">
             <h3>I'm <script>document.write(obj[0].name);</script>,click to see my info</h3>

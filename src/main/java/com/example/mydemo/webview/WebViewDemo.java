@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -42,7 +43,7 @@ import java.io.FileOutputStream;
  * Created by ldh on 2016/4/1 0001.
  */
 
-
+@SuppressLint("SetJavaScriptEnabled")
 public class WebViewDemo extends AppCompatActivity {
 
 
@@ -63,6 +64,9 @@ public class WebViewDemo extends AppCompatActivity {
         b2 = (Button) findViewById(R.id.bt_2);
         b3 = (Button) findViewById(R.id.bt_3);
         wv = (WebView) findViewById(R.id.wv);
+
+        // 定义并绑定按钮单击监听器
+        initEvents();
 
 // 覆盖默认后退按钮的作用，替换成WebView里的查看历史页面
         wv.setOnKeyListener(new View.OnKeyListener() {
@@ -89,8 +93,6 @@ public class WebViewDemo extends AppCompatActivity {
         //设置页面滚动条风格
         wv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//滚动条风格，为0指滚动条不占用空间，直接覆盖在网页上
 
-        //添加js调用Android代码支持
-        wv.addJavascriptInterface(new AndroidToastForJs(this), "JavaScriptInterface");
 
 // 设置WebViewClient对象
         wv.setWebViewClient(wvc);
@@ -99,10 +101,23 @@ public class WebViewDemo extends AppCompatActivity {
         wv.setWebChromeClient(wvcc);
 
 //加载网页
-        wv.loadUrl("file:///android_asset/demo0.html");
+        wv.loadUrl("file:///android_asset/demo1.html");
 
-// 定义并绑定按钮单击监听器
-        initEvents();
+        wv.addJavascriptInterface(new JavaScriptInterface(this),"JavaScriptInterface");
+
+        //添加js调用Android代码支持
+        wv.addJavascriptInterface(new JavaScriptInter(){
+            @JavascriptInterface
+            //此处一定要添加该注解，否则在4.1+系统上运行失败
+            @Override
+            public void onJsCallAndroid() {
+                Toast.makeText(WebViewDemo.this, "Js调用安卓代码", Toast.LENGTH_SHORT).show();
+            }
+        }, "demo");
+    }
+
+    public interface JavaScriptInter{
+        void onJsCallAndroid();
     }
 
     private void initActionBar() {

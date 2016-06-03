@@ -3,6 +3,7 @@ package com.example.mydemo;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,8 @@ public class MyListFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         List<String> mDatas = new ArrayList<String>();
-        String[] ss=new String[]{"MyListActivity","TimerDemoActivity","VolleyActivity","AnimationActivity","WebViewDemo","WebViewDemo2"};
+        String[] ss=new String[]{"MyListActivity","TimerDemoActivity","VolleyActivity","AnimationActivity","WebViewDemo","WebViewDemo2",
+                "打开指定网页","CoordActivity"};
         mDatas.addAll(Arrays.asList(ss));
 
         mContext = getActivity();
@@ -68,7 +70,16 @@ public class MyListFragment extends ListFragment {
                 intent.setClass(mContext, WebViewDemo2.class);
                 break;
             case 6:
+                Intent intent1 = new Intent(Intent.ACTION_VIEW);
+                intent1.setData(Uri.parse("http://www.bing.com"));
+                startActivity(intent1);
+                return;
             case 7:
+                intent.setClass(mContext, CoordActivity.class);
+                break;
+            default:
+                break;
+
         }
         mContext.startActivity(intent);
         super.onListItemClick(l, v, position, id);

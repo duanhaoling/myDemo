@@ -36,5 +36,6 @@
       <item name="android:indeterminateDrawable">@drawable/progress_medium_holo</item>
   </style>
 
-
+    <style name="AppBarNative" parent="AppTheme.AppBarOverlay">
+    </style>
 </resources>
