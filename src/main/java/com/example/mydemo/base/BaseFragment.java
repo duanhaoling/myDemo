@@ -17,7 +17,7 @@ import com.example.mydemo.widget.WaitDialog;
 /**
  * Created by ldh on 2016/5/24 0024.
  */
-public class BaseFragment extends Fragment implements BaseFragmentInterface{
+public class BaseFragment extends Fragment implements BaseFragmentInterface,View.OnClickListener{
 
     public static final int STATE_NONE = 0;
     public static final int STATE_REFRESH = 1;
@@ -32,11 +32,31 @@ public class BaseFragment extends Fragment implements BaseFragmentInterface{
         return (AppContext) getActivity().getApplication();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.mInflater = inflater;
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     protected int getLayoutId() {
@@ -77,6 +97,7 @@ public class BaseFragment extends Fragment implements BaseFragmentInterface{
         }
         return null;
     }
+
     @Override
     public void initView(View view) {
 
@@ -84,6 +105,11 @@ public class BaseFragment extends Fragment implements BaseFragmentInterface{
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

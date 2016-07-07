@@ -1,6 +1,7 @@
 package com.example.mydemo.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.mydemo.R;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
@@ -23,6 +25,12 @@ import com.nineoldandroids.view.ViewHelper;
  * Created by ldh on 2016/5/12 0012.
  */
 public class CircleSimple extends View {
+
+    int startAngle;
+    int endAngle;
+    int radius;
+
+
     private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private float mRotate;
     private Matrix mMatrix = new Matrix();
@@ -42,12 +50,17 @@ public class CircleSimple extends View {
 
     public CircleSimple(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleSimple);
+        radius = typedArray.getInt(R.styleable.CircleSimple_radius,160);
+        startAngle = typedArray.getInt(R.styleable.CircleSimple_startangle,135);
+        endAngle = typedArray.getInt(R.styleable.CircleSimple_endangle,405);
+
         //设置可以获取焦点
         setFocusable(true);
         setFocusableInTouchMode(true);
         //初始化画笔
-        float x = 160;
-        float y = 160;
+        float x = radius;
+        float y = radius;
         mShader = new SweepGradient(x, y, new int[]{
                 0xFFB0F44B,
                 0xFFE8DD30,
@@ -64,11 +77,12 @@ public class CircleSimple extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         Paint paint = mPaint;
-        float x = 160;
-        float y = 160;
+        float x = radius;
+        float y = radius;
         //背景色
-        canvas.drawColor(Color.WHITE);
+        canvas.drawColor(Color.TRANSPARENT);
         //
         mMatrix.setRotate(mRotate, x, y);
         mShader.setLocalMatrix(mMatrix);
@@ -77,7 +91,7 @@ public class CircleSimple extends View {
             mRotate = 0;
         }
         invalidate();
-        getArc(canvas, x, y, 100, 135, 405, paint);
+        getArc(canvas, x, y, radius, startAngle, endAngle, paint);
     }
 
     public void getArc(Canvas canvas, float o_x, float o_y, float r, float startAngel, float endAngel, Paint paint) {
@@ -91,11 +105,14 @@ public class CircleSimple extends View {
         canvas.drawCircle(o_x, o_y, r, paint);
     }
 
+    //自定义view的宽高
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-
+        int width = radius * 2;
+        int height = radius * 2;
+        setMeasuredDimension(width, height);
+        //自定义view的宽高时，不实用下面函数
+        //super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override

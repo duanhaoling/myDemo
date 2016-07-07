@@ -9,8 +9,7 @@
         <script src="js/jquery.js"></script>  
         <script src="js/jquery.mobile-1.1.1.min.js"></script>
             <script type="text/javascript">
-    var result = JavaScriptInterface.jsontohtml();
-    var obj = eval("("+result+")");//解析json字符串
+
     function showAndroidToast(toast)
     {
         JavaScriptInterface.showToast(toast);
@@ -31,6 +30,9 @@
     function list(){
         document.write("<div data-role='header'><p>another</p></div>");
     }
+    function changeColor(color){
+        document.body.style.backgroundColor = color ;
+    }
     </script>
         </head>
     <body>   
@@ -48,25 +50,6 @@
         <div data-role="footer">  
             <h4>Page Footer</h4>  
         </div><!-- /footer -->  
-    </div><!-- /page -->
-
-    <div data-role="page" >
-        <div data-role="header" data-theme="c">
-            <h1>Android via Interface</h1>
-        </div><!-- /header -->
-        <div data-role="content">
-            <h2 onclick="window.demo.onJsCallAndroid()" data-theme="e">say hello!</h2>
-            <a onclick="window.demo.onJsCallAndroid()">click me!</a>
-        </div><!-- /content -->
-        <div data-role="collapsible" data-theme="c" data-content-theme="f">
-            <h3>I'm <script>document.write(obj[0].name);</script>,click to see my info</h3>
-            <p><script>document.write("<p>姓名："+obj[0].name+"</p>");</script></p>
-            <p><script>document.write("<p>年龄："+obj[0].age+"</p>");</script></p>
-            <p><script>document.write("<p>地址："+obj[0].address+"</p>");</script></p>
-        </div>
-        <div data-role="footer" data-theme="c">
-            <h4>Page Footer</h4>
-        </div><!-- /footer -->
     </div><!-- /page -->
 
     </body>  

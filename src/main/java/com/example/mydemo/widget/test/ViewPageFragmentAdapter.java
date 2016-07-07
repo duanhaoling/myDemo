@@ -1,5 +1,6 @@
 package com.example.mydemo.widget.test;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import com.example.mydemo.widget.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 
+@SuppressLint("Recycle")
 public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
 
     protected PagerSlidingTabStrip mPagerStrip;
@@ -48,10 +50,12 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
         if (pageInfo == null) {
             return;
         }
+        // 加入tab title
         View v = LayoutInflater.from(mContext).inflate(R.layout.base_viewpage_fragment_tab_item,null,false);
         TextView title = (TextView) v.findViewById(R.id.tab_title);
         title.setText(pageInfo.title);
         mPagerStrip.addTab(v);
+
         mTabs.add(pageInfo);
         notifyDataSetChanged();
     }
@@ -66,6 +70,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
     /**
      * 移除一个Tab
      * @param index
+     *     备注：如果index小于0，则从第一个开始删 如果大于tab的数量值则从最后一个开始删除
      */
     private void remove(int index) {
         if (mTabs.isEmpty()) return;

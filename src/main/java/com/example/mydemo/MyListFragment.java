@@ -1,10 +1,9 @@
 package com.example.mydemo;
 
-import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,10 @@ import android.widget.ListView;
 
 import com.example.mydemo.adapter.MyListActivity;
 import com.example.mydemo.animation.AnimationActivity;
+import com.example.mydemo.material.CoordActivity;
+import com.example.mydemo.popu.LiuyanActivity;
 import com.example.mydemo.timer.TimerDemoActivity;
+import com.example.mydemo.viewflipper.ViewFlipperActivity;
 import com.example.mydemo.volley.VolleyActivity;
 import com.example.mydemo.webview.WebViewDemo;
 import com.example.mydemo.webview.WebViewDemo2;
@@ -34,7 +36,7 @@ public class MyListFragment extends ListFragment {
 
         List<String> mDatas = new ArrayList<String>();
         String[] ss=new String[]{"MyListActivity","TimerDemoActivity","VolleyActivity","AnimationActivity","WebViewDemo","WebViewDemo2",
-                "打开指定网页","CoordActivity"};
+                "ViewFlipperActivity","CoordActivity","留言板"};
         mDatas.addAll(Arrays.asList(ss));
 
         mContext = getActivity();
@@ -70,12 +72,17 @@ public class MyListFragment extends ListFragment {
                 intent.setClass(mContext, WebViewDemo2.class);
                 break;
             case 6:
-                Intent intent1 = new Intent(Intent.ACTION_VIEW);
+               /* Intent intent1 = new Intent(Intent.ACTION_VIEW);
                 intent1.setData(Uri.parse("http://www.bing.com"));
                 startActivity(intent1);
-                return;
+                return;*/
+                intent.setClass(mContext, ViewFlipperActivity.class);
+                break;
             case 7:
                 intent.setClass(mContext, CoordActivity.class);
+                break;
+            case 8:
+                intent.setClass(mContext, LiuyanActivity.class);
                 break;
             default:
                 break;

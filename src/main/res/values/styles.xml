@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -32,10 +32,24 @@
     </style>
 
     <style name="Widget"></style>
-    <style name="Widget.ProgressBar">
-      <item name="android:indeterminateDrawable">@drawable/progress_medium_holo</item>
-  </style>
 
-    <style name="AppBarNative" parent="AppTheme.AppBarOverlay">
+    <style name="Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/progress_medium_holo</item>
     </style>
+
+    <style name="CoordinatorStyle" parent="AppTheme.NoActionBar" tools:targetApi="lollipop">
+        <item name="colorPrimary">#FFCCCC</item>
+        <item name="colorPrimaryDark">#FF00FF</item>
+    </style>
+
+    <style name="AppBarNative" parent="AppTheme.AppBarOverlay"></style>
+
+    <!-- 加载滚动条样式 -->
+    <style name="loading">
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateDrawable">@drawable/progressloading</item>
+        <item name="android:indeterminateDuration">1000</item>
+        <item name="android:indeterminateOnly">true</item>
+    </style>
+
 </resources>

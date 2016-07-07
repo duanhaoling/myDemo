@@ -19,7 +19,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,8 +30,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".timer.TimerDemoActivity" />
         <activity android:name=".animation.AnimationActivity" />
-        <activity android:name=".widget.test.WidgetActivity" />
-        <activity android:name=".CoordActivity"></activity>
+        <activity
+            android:name=".widget.test.WidgetActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".material.CoordActivity"
+            android:theme="@style/CoordinatorStyle" />
+        <activity android:name=".popu.LiuyanActivity" />
+        <activity
+            android:name=".viewflipper.ViewFlipperActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -9,4 +9,10 @@
     <declare-styleable name="Follow">
         <attr name="target" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="CircleSimple">
+        <attr name="radius" format="dimension|integer" />
+        <attr name="startangle" format="integer" />
+        <attr name="endangle" format="integer" />
+    </declare-styleable>
 </resources>

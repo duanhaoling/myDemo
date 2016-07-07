@@ -103,9 +103,10 @@ public class WebViewDemo extends AppCompatActivity {
 //加载网页
         wv.loadUrl("file:///android_asset/demo1.html");
 
+        //添加js调用Android代码支持1
         wv.addJavascriptInterface(new JavaScriptInterface(this),"JavaScriptInterface");
 
-        //添加js调用Android代码支持
+        //添加js调用Android代码支持2
         wv.addJavascriptInterface(new JavaScriptInter(){
             @JavascriptInterface
             //此处一定要添加该注解，否则在4.1+系统上运行失败
@@ -113,11 +114,22 @@ public class WebViewDemo extends AppCompatActivity {
             public void onJsCallAndroid() {
                 Toast.makeText(WebViewDemo.this, "Js调用安卓代码", Toast.LENGTH_SHORT).show();
             }
+            @JavascriptInterface
+            @Override
+            public void callAndroidMethod(int a, float b, String c, boolean d) {
+                if (d) {
+                    String strMessage = "--" + (a + 1) + "--" + (b + 1) + "--" + c + "--" + d;
+                    new AlertDialog.Builder(WebViewDemo.this).setTitle("callAndroidMethod")
+                            .setMessage(strMessage).show();
+                }
+            }
+
         }, "demo");
     }
 
     public interface JavaScriptInter{
         void onJsCallAndroid();
+        void callAndroidMethod(int a, float b,String c,boolean d);
     }
 
     private void initActionBar() {
@@ -285,8 +297,9 @@ public class WebViewDemo extends AppCompatActivity {
 // 加载URL assets目录下的内容可以用 "[url=file:///android_asset]file:///android_asset[/url]" 前缀
 
 //                wv.loadUrl("[url=file:///android_asset/html/test1.html]file:///android_asset/html/test1.html[/url]");
-                wv.loadUrl("http://www.baidu.com");
-
+//                wv.loadUrl("http://www.baidu.com");
+                String color = "#00ee00";
+                wv.loadUrl("Javascript:changeColor('"+color+"');");
             }
 
         });
@@ -307,7 +320,7 @@ public class WebViewDemo extends AppCompatActivity {
 
         });
 
-// 定义并绑定按钮单击监听器
+// 定义并绑定按钮单击监听器,网页截图逻辑
 
         b3.setOnClickListener(new View.OnClickListener() {
 
@@ -315,44 +328,24 @@ public class WebViewDemo extends AppCompatActivity {
             public void onClick(View v) {
 
                 Picture pic = wv.capturePicture();
-
                 int width = pic.getWidth();
-
                 int height = pic.getHeight();
-
                 if (width > 0 && height > 0) {
-
                     Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
                     Canvas canvas = new Canvas(bmp);
-
                     pic.draw(canvas);
-
                     try {
-
                         String fileName = "sdcard/" + System.currentTimeMillis() + ".png";
-
                         FileOutputStream fos = new FileOutputStream(fileName);
-
                         if (fos != null) {
-
                             bmp.compress(Bitmap.CompressFormat.PNG, 90, fos);
-
                             fos.close();
-
                         }
-
                         Toast.makeText(getApplicationContext(), "截图成功，文件名是：" + fileName, Toast.LENGTH_SHORT).show();
-
                     } catch (Exception e) {
-
                         e.printStackTrace();
-
-
                     }
-
                 }
-
             }
 
         });
