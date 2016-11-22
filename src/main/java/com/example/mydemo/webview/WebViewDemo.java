@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -154,6 +155,10 @@ public class WebViewDemo extends AppCompatActivity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             MyToast.showtoast(WebViewDemo.this,"WebViewClient.shouldOverrideUrlLoading");
+            if (!TextUtils.isEmpty(url) && url.startsWith("call-app-method://clickShareButton")) {
+                Toast.makeText(WebViewDemo.this, url, Toast.LENGTH_SHORT).show();
+                return true;
+            }
 // 使用自己的WebView组件来响应Url加载事件，而不是使用默认浏览器器加载页面
             wv.loadUrl(url);
 // 记得消耗掉这个事件。给不知道的朋友再解释一下，Android中返回True的意思就是到此为止吧,事件就会不会冒泡传递了，我们称之为消耗掉

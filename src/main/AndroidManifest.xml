@@ -40,6 +40,7 @@
         <activity
             android:name=".viewflipper.ViewFlipperActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <service android:name=".service.DownloadService"/>
     </application>
 
 </manifest>
