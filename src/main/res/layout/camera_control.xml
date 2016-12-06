@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.anjuke.android.newbroker.camera.ui.ControlPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/control_panel"
+    android:layout_width="wrap_content"
+    android:background="#F2F2F2"
+    android:layout_height="wrap_content" >
+
+    <Button
+        android:id="@+id/camera_cancle_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:textSize="20sp"
+        android:paddingLeft="20dp"
+        android:background="@color/transparent"
+        android:text="@string/alert_dialog_cancel"
+        android:textColor="@color/text_color_black" />
+
+    <com.example.mydemo.camera.ui.ShutterButton
+        android:id="@+id/shutter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/anjuke_icon_takephoto"
+        android:scaleType="center" />
+
+    <Button
+        android:id="@+id/camera_ok_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:textSize="20sp"
+        android:paddingRight="20dp"
+        android:text="@string/alert_dialog_ok"
+        android:background="@color/transparent"
+        android:textColor="@color/text_color_black" />
+
+</com.anjuke.android.newbroker.camera.ui.ControlPanelLayout>

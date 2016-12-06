@@ -30,6 +30,10 @@
     <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
     <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
     <string name="tip_network_error">没有可用的网络</string>
+    <string name="camera_error_title">相机故障</string>
+    <string name="dialog_ok">确定</string>
+    <string name="alert_dialog_cancel">取消</string>
+    <string name="alert_dialog_ok">确定</string>
 
 
 </resources>

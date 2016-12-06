@@ -12,8 +12,10 @@ import android.widget.ListView;
 
 import com.example.mydemo.adapter.MyListActivity;
 import com.example.mydemo.animation.AnimationActivity;
+import com.example.mydemo.fileprovider_client.FileProviderTestActivity;
 import com.example.mydemo.material.CoordActivity;
 import com.example.mydemo.popu.LiuyanActivity;
+import com.example.mydemo.test_java.RxjavaTestActivity;
 import com.example.mydemo.timer.TimerDemoActivity;
 import com.example.mydemo.viewflipper.ViewFlipperActivity;
 import com.example.mydemo.volley.VolleyActivity;
@@ -30,13 +32,14 @@ import java.util.List;
 public class MyListFragment extends ListFragment {
 
     private Context mContext;
+    private final String[] ss = new String[]{"MyListActivity", "TimerDemoActivity", "VolleyActivity", "AnimationActivity", "WebViewDemo", "WebViewDemo2",
+            "ViewFlipperActivity", "CoordActivity", "留言板", "RxjavaDemo","FileProviderTest"};
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         List<String> mDatas = new ArrayList<String>();
-        String[] ss=new String[]{"MyListActivity","TimerDemoActivity","VolleyActivity","AnimationActivity","WebViewDemo","WebViewDemo2",
-                "ViewFlipperActivity","CoordActivity","留言板"};
         mDatas.addAll(Arrays.asList(ss));
 
         mContext = getActivity();
@@ -63,10 +66,10 @@ public class MyListFragment extends ListFragment {
                 intent.setClass(mContext, VolleyActivity.class);
                 break;
             case 3:
-                intent.setClass(mContext,AnimationActivity.class);
+                intent.setClass(mContext, AnimationActivity.class);
                 break;
             case 4:
-                intent.setClass(mContext,WebViewDemo.class);
+                intent.setClass(mContext, WebViewDemo.class);
                 break;
             case 5:
                 intent.setClass(mContext, WebViewDemo2.class);
@@ -84,9 +87,13 @@ public class MyListFragment extends ListFragment {
             case 8:
                 intent.setClass(mContext, LiuyanActivity.class);
                 break;
+            case 9:
+                intent.setClass(mContext, RxjavaTestActivity.class);
+                break;
+            case 10:
+                intent.setClass(mContext, FileProviderTestActivity.class);
             default:
                 break;
-
         }
         mContext.startActivity(intent);
         super.onListItemClick(l, v, position, id);

@@ -19,6 +19,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,15 +33,20 @@
         <activity android:name=".animation.AnimationActivity" />
         <activity
             android:name=".widget.test.WidgetActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".material.CoordActivity"
             android:theme="@style/CoordinatorStyle" />
         <activity android:name=".popu.LiuyanActivity" />
         <activity
             android:name=".viewflipper.ViewFlipperActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <service android:name=".service.DownloadService"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".service.DownloadService" />
+
+        <activity android:name=".camera.CameraActivity" />
+        <activity android:name=".test_java.RxjavaTestActivity" />
+        <activity android:name=".fileprovider_client.FileProviderTestActivity"></activity>
     </application>
 
 </manifest>

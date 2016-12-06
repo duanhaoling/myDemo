@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1" >
+
+    <com.example.mydemo.camera.ui.PreviewFrameLayout
+        android:id="@+id/frame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true" >
+        <SurfaceView
+            android:id="@+id/camera_preview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+
+        <include layout="@layout/focus_indicator" />
+    </com.example.mydemo.camera.ui.PreviewFrameLayout>
+    <com.example.mydemo.camera.gallery.Gallery
+        android:id="@+id/camera_gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/translucence"
+        >
+    </com.example.mydemo.camera.gallery.Gallery>
+</RelativeLayout>
