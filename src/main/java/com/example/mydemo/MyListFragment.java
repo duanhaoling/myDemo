@@ -15,7 +15,7 @@ import com.example.mydemo.animation.AnimationActivity;
 import com.example.mydemo.fileprovider_client.FileProviderTestActivity;
 import com.example.mydemo.material.CoordActivity;
 import com.example.mydemo.popu.LiuyanActivity;
-import com.example.mydemo.test_java.RxjavaTestActivity;
+import com.example.mydemo.remoteview.ReceiveNotificationActivity;
 import com.example.mydemo.timer.TimerDemoActivity;
 import com.example.mydemo.viewflipper.ViewFlipperActivity;
 import com.example.mydemo.volley.VolleyActivity;
@@ -33,7 +33,7 @@ public class MyListFragment extends ListFragment {
 
     private Context mContext;
     private final String[] ss = new String[]{"MyListActivity", "TimerDemoActivity", "VolleyActivity", "AnimationActivity", "WebViewDemo", "WebViewDemo2",
-            "ViewFlipperActivity", "CoordActivity", "留言板", "RxjavaDemo","FileProviderTest"};
+            "ViewFlipperActivity", "CoordActivity", "留言板", "Notification","FileProviderTest"};
 
 
     @Override
@@ -88,7 +88,7 @@ public class MyListFragment extends ListFragment {
                 intent.setClass(mContext, LiuyanActivity.class);
                 break;
             case 9:
-                intent.setClass(mContext, RxjavaTestActivity.class);
+                intent.setClass(mContext, ReceiveNotificationActivity.class);
                 break;
             case 10:
                 intent.setClass(mContext, FileProviderTestActivity.class);

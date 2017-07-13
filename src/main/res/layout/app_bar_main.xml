@@ -31,13 +31,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
 
-    <com.example.mydemo.widget.CircleSimple
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="20dp"
-        app:endangle="360"
-        app:radius="200"
-        app:startangle="0" />
+
 
 </android.support.design.widget.CoordinatorLayout>

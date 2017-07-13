@@ -6,25 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".adapter.MyListActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:titleTextColor="@color/colorAccent"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-            <!--<TextView-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:textSize="20sp"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:text="@string/app_name"-->
-                <!--android:layout_height="wrap_content" />-->
-            </android.support.v7.widget.Toolbar>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/colorAccent">
+        <!--<TextView-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:textSize="20sp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:text="@string/app_name"-->
+        <!--android:layout_height="wrap_content" />-->
+    </android.support.v7.widget.Toolbar>
 
     <com.example.mydemo.adapter.MyListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview">
-    </com.example.mydemo.adapter.MyListView>
+        android:layout_height="match_parent"></com.example.mydemo.adapter.MyListView>
+
+    <com.example.mydemo.widget.CircleSimple
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:endangle="360"
+        app:radius="200"
+        app:startangle="0" />
 
 </RelativeLayout>

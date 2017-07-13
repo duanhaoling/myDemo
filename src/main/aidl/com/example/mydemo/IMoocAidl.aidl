@@ -1,5 +1,5 @@
 // IMoocAidl.aidl.aidl
-package com.example.myapplication;
+package com.example.mydemo;
 
 // Declare any non-default types here with import statements
 
