@@ -13,6 +13,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e6c6ff9086549350c2f37ca72a48653b1e08e79c" />
+
         <receiver android:name=".remoteview.MyAppWidgetProvider">
             <meta-data
                 android:name="android.appwidget.provider"
@@ -61,6 +66,7 @@
         <activity
             android:name=".remoteview.ReceiveNotificationActivity"
             android:process=":remote" />
+
     </application>
 
 </manifest>

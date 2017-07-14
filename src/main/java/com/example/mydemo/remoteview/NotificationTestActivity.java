@@ -44,6 +44,11 @@ public class NotificationTestActivity extends AppCompatActivity {
         manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+    }
+
     public void onclick(View view) {
         switch (view.getId()) {
             case R.id.btn_default:
