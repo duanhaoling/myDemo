@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'org.greenrobot.greendao'
+
 buildscript {
     repositories {
         jcenter()
@@ -8,9 +10,11 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'io.fabric.tools:gradle:1.21.5'
+        classpath 'io.fabric.tools:gradle:1.21.6'
         classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+        //添加apt插件,使用注解 ，Dagger2
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.1.0'
     }
 }
 
@@ -21,8 +25,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.3'
 
     defaultConfig {
         applicationId "com.ldh.mydemo"
@@ -41,34 +45,58 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+//    schemaVersion： 数据库schema版本，也可以理解为数据库版本号
+//    daoPackage：设置DaoMaster、DaoSession、Dao包名
+//    targetGenDir：设置DaoMaster、DaoSession、Dao目录
+//    targetGenDirTest：设置生成单元测试目录
+//    generateTests：设置自动生成单元测试用例
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.afa.tourism.greendao.gen'
+        targetGenDir 'src/main/java'
+    }
+
+    //使用DataBinding
+    dataBinding {
+        enabled = true
+    }
 }
 
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.android.support:cardview-v7:24.2.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'io.reactivex:rxjava:1.1.8'
-    compile 'io.reactivex:rxandroid:1.2.1'
 
     //dependencies for retrolambda
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
+    //fabric
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
     compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
         transitive = true;
     }
+    //greendao
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'io.reactivex:rxjava:1.1.8'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'org.greenrobot:greendao:3.1.0'
+    compile 'org.greenrobot:greendao-generator:3.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
 }
 
+//fabric
 crashlytics {
     enableNdk true
     androidNdkOut 'src/main/obj'
     androidNdkLibsOut 'src/main/libs'
 }
+
+

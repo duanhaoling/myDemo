@@ -1,5 +1,6 @@
 package com.example.mydemo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import com.example.mydemo.adapter.MyListActivity;
 import com.example.mydemo.animation.AnimationActivity;
 import com.example.mydemo.fileprovider_client.FileProviderTestActivity;
+import com.example.mydemo.greendaotdemo.DbTestActivity;
 import com.example.mydemo.material.CoordActivity;
 import com.example.mydemo.popu.LiuyanActivity;
 import com.example.mydemo.remoteview.ReceiveNotificationActivity;
@@ -32,8 +34,20 @@ import java.util.List;
 public class MyListFragment extends ListFragment {
 
     private Context mContext;
-    private final String[] ss = new String[]{"MyListActivity", "TimerDemoActivity", "VolleyActivity", "AnimationActivity", "WebViewDemo", "WebViewDemo2",
-            "ViewFlipperActivity", "CoordActivity", "留言板", "Notification","FileProviderTest"};
+    private final String[] ss = new String[]{
+            "MyListActivity",
+            "TimerDemoActivity",
+            "VolleyActivity",
+            "AnimationActivity",
+            "WebViewDemo",
+            "WebViewDemo2",
+            "ViewFlipperActivity",
+            "CoordActivity",
+            "留言板",
+            "Notification",
+            "FileProviderTest",
+            "DatabaseTest"
+    };
 
 
     @Override
@@ -54,49 +68,55 @@ public class MyListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         ListView listView = getListView();
         String itemAtPosition = (String) listView.getItemAtPosition(position);
-        Intent intent = new Intent();
         switch (position) {
             case 0:
-                intent.setClass(mContext, MyListActivity.class);
+                gotoActivity(MyListActivity.class);
                 break;
             case 1:
-                intent.setClass(mContext, TimerDemoActivity.class);
+                gotoActivity(TimerDemoActivity.class);
                 break;
             case 2:
-                intent.setClass(mContext, VolleyActivity.class);
+                gotoActivity(VolleyActivity.class);
                 break;
             case 3:
-                intent.setClass(mContext, AnimationActivity.class);
+                gotoActivity(AnimationActivity.class);
                 break;
             case 4:
-                intent.setClass(mContext, WebViewDemo.class);
+                gotoActivity(WebViewDemo.class);
                 break;
             case 5:
-                intent.setClass(mContext, WebViewDemo2.class);
-                break;
-            case 6:
-               /* Intent intent1 = new Intent(Intent.ACTION_VIEW);
+                /* Intent intent1 = new Intent(Intent.ACTION_VIEW);
                 intent1.setData(Uri.parse("http://www.bing.com"));
                 startActivity(intent1);
                 return;*/
-                intent.setClass(mContext, ViewFlipperActivity.class);
+                gotoActivity(WebViewDemo2.class);
+                break;
+            case 6:
+                gotoActivity(ViewFlipperActivity.class);
                 break;
             case 7:
-                intent.setClass(mContext, CoordActivity.class);
+                gotoActivity(CoordActivity.class);
                 break;
             case 8:
-                intent.setClass(mContext, LiuyanActivity.class);
+                gotoActivity(LiuyanActivity.class);
                 break;
             case 9:
-                intent.setClass(mContext, ReceiveNotificationActivity.class);
+                gotoActivity(ReceiveNotificationActivity.class);
                 break;
             case 10:
-                intent.setClass(mContext, FileProviderTestActivity.class);
+                gotoActivity(FileProviderTestActivity.class);
+                break;
+            case 11:
+                gotoActivity(DbTestActivity.class);
             default:
                 break;
         }
+    }
+
+
+    public void gotoActivity(Class<? extends Activity> clazz) {
+        Intent intent = new Intent(mContext, clazz);
         mContext.startActivity(intent);
-        super.onListItemClick(l, v, position, id);
     }
 
     private void startActivity(String name) {
