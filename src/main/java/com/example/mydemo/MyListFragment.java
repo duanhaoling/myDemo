@@ -18,6 +18,7 @@ import com.example.mydemo.greendaotdemo.DbTestActivity;
 import com.example.mydemo.material.CoordActivity;
 import com.example.mydemo.popu.LiuyanActivity;
 import com.example.mydemo.remoteview.ReceiveNotificationActivity;
+import com.example.mydemo.test_java.RxjavaTestActivity;
 import com.example.mydemo.timer.TimerDemoActivity;
 import com.example.mydemo.viewflipper.ViewFlipperActivity;
 import com.example.mydemo.volley.VolleyActivity;
@@ -46,6 +47,7 @@ public class MyListFragment extends ListFragment {
             "留言板",
             "Notification",
             "FileProviderTest",
+            "RxjavaTest",
             "DatabaseTest"
     };
 
@@ -107,6 +109,9 @@ public class MyListFragment extends ListFragment {
                 gotoActivity(FileProviderTestActivity.class);
                 break;
             case 11:
+                gotoActivity(RxjavaTestActivity.class);
+                break;
+            case 12:
                 gotoActivity(DbTestActivity.class);
             default:
                 break;

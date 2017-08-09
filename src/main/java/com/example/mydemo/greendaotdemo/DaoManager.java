@@ -4,9 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.afa.tourism.greendao.gen.DaoMaster;
-import com.afa.tourism.greendao.gen.DaoSession;
-
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 
 /**

@@ -1,16 +1,17 @@
 package com.example.mydemo.test_java;
 
+import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.mydemo.R;
 import com.example.mydemo.bean.Employee;
+import com.example.mydemo.databinding.ActivityRxjavaTestBinding;
 import com.example.mydemo.util.LogUtil;
 import com.example.mydemo.util.MyToast;
 
@@ -19,49 +20,45 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
+import static com.example.mydemo.R.id.testRxjava1;
+import static com.example.mydemo.R.id.testRxjava2;
+import static com.example.mydemo.R.id.testRxjava3;
+import static com.example.mydemo.R.id.testRxjava4;
+import static com.example.mydemo.R.id.testRxjava5;
+import static com.example.mydemo.R.id.testRxjava6;
+import static com.example.mydemo.R.id.testRxjava7;
+import static com.example.mydemo.R.id.testRxjava8;
+import static com.example.mydemo.R.id.testRxjava9;
 
 public class RxjavaTestActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "RxjavaTestActivity";
-    @Bind(R.id.testRxjava1)
-    Button testRxjava1;
-    @Bind(R.id.testRxjava2)
-    Button testRxjava2;
-    @Bind(R.id.testRxjava3)
-    Button testRxjava3;
-    @Bind(R.id.testRxjava4)
-    Button testRxjava4;
-    @Bind(R.id.testRxjava5)
-    Button testRxjava5;
-    @Bind(R.id.testRxjava6)
-    Button testRxjava6;
-    @Bind(R.id.testRxjava7)
-    Button testRxjava7;
-    @Bind(R.id.testRxjava8)
-    Button testRxjava8;
-    @Bind(R.id.testRxjava9)
-    Button testRxjava9;
-    @Bind(R.id.ivLogo)
-    ImageView ivLogo;
-
+    private ActivityRxjavaTestBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rxjava_test);
-        ButterKnife.bind(this);
-        testRxjava1.setOnClickListener(v -> {
-//        testDemo1();
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_rxjava_test);
+        mBinding.testRxjava1.setOnClickListener(v -> {
+            testDemo1();
             Observable.just("hello word!")
                     .map(s -> s + "I am ldh!")
                     .subscribeOn(Schedulers.io())
@@ -69,46 +66,85 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
                     .subscribe(s -> Log.i(TAG, s));
         });
 
-        testRxjava2.setOnClickListener(this);
-        testRxjava3.setOnClickListener(this);
-        testRxjava4.setOnClickListener(this);
-        testRxjava5.setOnClickListener(this);
-        testRxjava6.setOnClickListener(this);
-        testRxjava7.setOnClickListener(this);
-        testRxjava8.setOnClickListener(this);
-        testRxjava9.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.testRxjava2:
+            case testRxjava1:
+//                testDemo1();
+                break;
+            case testRxjava2:
                 testDemo2();
                 break;
-            case R.id.testRxjava3:
+            case testRxjava3:
                 testDemo3();
                 break;
-            case R.id.testRxjava4:
+            case testRxjava4:
                 testDemo4();
                 break;
-            case R.id.testRxjava5:
+            case testRxjava5:
                 testDemo5();
                 break;
-            case R.id.testRxjava6:
+            case testRxjava6:
+                testDemo6();
                 break;
-            case R.id.testRxjava7:
+            case testRxjava7:
                 break;
-            case R.id.testRxjava8:
+            case testRxjava8:
                 break;
-            case R.id.testRxjava9:
+            case testRxjava9:
                 break;
             default:
                 break;
         }
     }
 
-    private void testDemo5() {
+    private void testDemo6() {
 
+    }
+
+    private void testDemo5() {
+        String phoneNum = mBinding.etPhone.getText().toString();
+        Observable.create(new ObservableOnSubscribe<Response>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Response> e) throws Exception {
+                Request.Builder builder = new Request.Builder()
+                        .url("http://api.avatardata.cn/MobilePlace/LookUp?key=ec47b85086be4dc8b5d941f5abd37a4e&mobileNumber=" + phoneNum)
+                        .get();
+                Request request = builder.build();
+                Call call = new OkHttpClient().newCall(request);
+                Response response = call.execute();
+                e.onNext(response);
+            }
+        }).map(new Function<Response, MoblieAddressEntity>() {
+
+            @Override
+            public MoblieAddressEntity apply(@NonNull Response response) throws Exception {
+                if (response.isSuccessful()) {
+                    ResponseBody body = response.body();
+                    if (body != null) {
+                        Log.i(TAG, "map:转换前:" + response.body().string());
+                        return JSON.parseObject(body.string(), MoblieAddressEntity.class);
+//                        return new Gson().fromJson(body.string(), MoblieAddressEntity.class);
+                    }
+                }
+                return null;
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(moblieAddressEntity -> Log.i(TAG, "doOnNext：保存成功：" + moblieAddressEntity.toString() + "\n")).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(entity -> {
+                    Log.i(TAG, "sucess:" + entity.toString() + "\n");
+                    mBinding.tvReadme.setText(entity.getResult().getMobilearea()
+                            + entity.getResult().getMobiletype());
+
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.e(TAG, "fail:" + throwable.getMessage() + "\n");
+                    }
+                });
 
     }
 
@@ -138,27 +174,34 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
             }
         };
 
-        Observable.from(list)
-                .flatMap(new Func1<Employee, Observable<Employee.Mission>>() {
+        Observable.fromIterable(list)
+                .flatMap(new Function<Employee, ObservableSource<Employee.Mission>>() {
                     @Override
-                    public Observable<Employee.Mission> call(Employee employee) {
-                        return Observable.from(employee.getMission());
+                    public ObservableSource<Employee.Mission> apply(@NonNull Employee employee) throws Exception {
+                        return Observable.fromIterable(employee.getMission());
                     }
                 })
-                .subscribe(new Subscriber<Employee.Mission>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
+                .subscribe(new Observer<Employee.Mission>() {
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
                     @Override
                     public void onNext(Employee.Mission mission) {
                         LogUtil.i(TAG, mission.desc);
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
 
@@ -166,15 +209,15 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void testDemo3() {
-        Observable.create(new Observable.OnSubscribe<String>() {
+        Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext("http://img4.duitang.com/uploads/item/201406/28/20140628141104_PXLRN.thumb.700_0.jpeg");
+            public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
+                e.onNext("http://img4.duitang.com/uploads/item/201406/28/20140628141104_PXLRN.thumb.700_0.jpeg");
+                e.onComplete();
             }
-        }).map(new Func1<String, Drawable>() {
+        }).map(new Function<String, Drawable>() {
             @Override
-            public Drawable call(String s) {
-
+            public Drawable apply(@NonNull String s) throws Exception {
                 try {
                     Drawable drawable = Drawable.createFromStream(new URL(s).openStream(), "iv");
 
@@ -189,9 +232,9 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
                 .subscribeOn(Schedulers.io())
                 //指定Subscriber 回调方法所在的线程，也就是onNext，onError，onComplete回调的线程
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Drawable>() {
+                .subscribe(new Observer<Drawable>() {
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(@NonNull Disposable d) {
 
                     }
 
@@ -201,8 +244,13 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
                     }
 
                     @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
                     public void onNext(Drawable drawable) {
-                        ivLogo.setImageDrawable(drawable);
+                        mBinding.ivLogo.setImageDrawable(drawable);
                     }
                 });
 
@@ -211,55 +259,55 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
 
     private void testDemo2() {
         //onComplete() Action0 表示一个无回调参数的Action；
-        Action0 onCompleteAction = new Action0() {
+        Action onCompleteAction = new Action() {
             @Override
-            public void call() {
+            public void run() throws Exception {
                 Log.i(TAG, "complete");
             }
         };
         //onNext(T t) Action1 表示一个含有一个回调参数的Action；
-        Action1 onNextAction = new Action1<String>() {
+        Consumer<String> onNextAction = new Consumer<String>() {
             @Override
-            public void call(String s) {
+            public void accept(String s) throws Exception {
                 LogUtil.i(TAG, s);
             }
         };
         //onError(Throwable t) 每个Action，都有一个 call() 方法，通过泛型，来指定对应参数的类型；
-        Action1<Throwable> onErrorAction = new Action1<Throwable>() {
+        Consumer<Throwable> onErrorAction = new Consumer<Throwable>() {
 
             @Override
-            public void call(Throwable throwable) {
+            public void accept(Throwable throwable) {
 
             }
         };
         // 创建一个observable
-        Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>() {
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void call(Subscriber<? super String> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
                 //发送一个"hello World"事件
-                subscriber.onNext("Hello word!");
+                e.onNext("local picture!");
                 //事件发送完成
-                subscriber.onCompleted();
+                e.onComplete();
             }
         });
         observable.subscribe(onNextAction, onErrorAction, onCompleteAction);
 
         //从res/mipmap中取出一张图片，显示在界面上。
         MyToast.showtoast(this, "从res/mipmap中取出一张图片，显示在界面上。");
-        Observable.create(new Observable.OnSubscribe<Drawable>() {
+        Observable.create(new ObservableOnSubscribe<Drawable>() {
             @Override
-            public void call(Subscriber<? super Drawable> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<Drawable> e) throws Exception {
 
                 Drawable drawable = ContextCompat.getDrawable(RxjavaTestActivity.this, R.mipmap.a3);
 
-                subscriber.onNext(drawable);
+                e.onNext(drawable);
 
-                subscriber.onCompleted();
+                e.onComplete();
 
             }
-        }).subscribe(new Subscriber<Drawable>() {
+        }).subscribe(new Observer<Drawable>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
 
             }
 
@@ -269,8 +317,13 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
             }
 
             @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
             public void onNext(Drawable drawable) {
-                ivLogo.setImageDrawable(drawable);
+                mBinding.ivLogo.setImageDrawable(drawable);
             }
         });
 
@@ -281,40 +334,45 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
         MyToast.showtoast(this, "基本用法");
         //不适用lambda
         Observable.just("Hello World!")
-                .map(new Func1<String, String>() {
+                .map(new Function<String, String>() {
                     @Override
-                    public String call(String s) {
+                    public String apply(@NonNull String s) throws Exception {
                         return s + "I am ldh!";
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<String>() {
+                .subscribe(new Consumer<String>() {
                     @Override
-                    public void call(String s) {
+                    public void accept(String s) {
                         Log.i(TAG, s);
                     }
                 });
 
         // 创建一个observable
-        Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>() {
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void call(Subscriber<? super String> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
                 //发送一个"hello World"事件
-                subscriber.onNext("Hello word!");
+                e.onNext("Hello word!");
                 //事件发送完成
-                subscriber.onCompleted();
+                e.onComplete();
             }
         });
         // 创建一个observer
         Observer<String> observer = new Observer<String>() {
             @Override
-            public void onCompleted() {
+            public void onComplete() {
                 LogUtil.i(TAG, "onCompleted");
             }
 
             @Override
             public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
 
             }
 
@@ -323,26 +381,9 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
                 LogUtil.i(TAG, "observer->" + s);
             }
         };
-        //或者创建一个subscriber
-        Subscriber<String> subscriber = new Subscriber<String>() {
 
-            @Override
-            public void onCompleted() {
-                LogUtil.i(TAG, "onCompleted");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String s) {
-                LogUtil.i(TAG, "subscriber->" + s);
-            }
-        };
         //订阅事件
         observable.subscribe(observer);
-        observable.subscribe(subscriber);
+
     }
 }

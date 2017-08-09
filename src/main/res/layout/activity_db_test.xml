@@ -7,7 +7,7 @@
 
         <variable
             name="video"
-            type="com.example.mydemo.greendaotdemo.VideoEntity" />
+            type="com.example.mydemo.greendaotdemo.LocalVideo" />
 
         <variable
             name="presenter"
@@ -36,6 +36,7 @@
                 android:id="@+id/query"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{()->presenter.query()}"
                 android:text="query_next_data" />
 
             <ViewStub

@@ -9,7 +9,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * Created by ldh on 2017/7/17.
  */
 @Entity()
-public class VideoEntity {
+public class LocalVideo {
     @Id(autoincrement = true)
     private Long id;
 
@@ -24,6 +24,21 @@ public class VideoEntity {
     private String latitude; //纬度
 
     private String longitude;  //经度
+
+    @Generated(hash = 294175055)
+    public LocalVideo(Long id, @NotNull String fileName, String creationTime,
+            @NotNull String md5, String latitude, String longitude) {
+        this.id = id;
+        this.fileName = fileName;
+        this.creationTime = creationTime;
+        this.md5 = md5;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    @Generated(hash = 551533627)
+    public LocalVideo() {
+    }
 
     public String getLongitude() {
         return this.longitude;
@@ -73,18 +88,5 @@ public class VideoEntity {
         this.id = id;
     }
 
-    @Generated(hash = 980448424)
-    public VideoEntity(Long id, @NotNull String fileName, String creationTime,
-            @NotNull String md5, String latitude, String longitude) {
-        this.id = id;
-        this.fileName = fileName;
-        this.creationTime = creationTime;
-        this.md5 = md5;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 
-    @Generated(hash = 1984976152)
-    public VideoEntity() {
-    }
 }

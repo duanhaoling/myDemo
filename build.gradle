@@ -47,14 +47,14 @@ android {
     }
 
 //    schemaVersion： 数据库schema版本，也可以理解为数据库版本号
-//    daoPackage：设置DaoMaster、DaoSession、Dao包名
+//    daoPackage：设置生成的DaoMaster、DaoSession、Dao包名
 //    targetGenDir：设置DaoMaster、DaoSession、Dao目录
 //    targetGenDirTest：设置生成单元测试目录
 //    generateTests：设置自动生成单元测试用例
     greendao {
         schemaVersion 1
-        daoPackage 'com.afa.tourism.greendao.gen'
-        targetGenDir 'src/main/java'
+//        daoPackage 'com.afa.tourism.greendao.gen'
+//        targetGenDir 'src/main/java'
     }
 
     //使用DataBinding
@@ -66,7 +66,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
     //dependencies for retrolambda
     //fabric
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
@@ -78,18 +77,25 @@ dependencies {
     //greendao
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'io.reactivex:rxjava:1.1.8'
-    compile 'io.reactivex:rxandroid:1.2.1'
     compile 'org.greenrobot:greendao:3.1.0'
     compile 'org.greenrobot:greendao-generator:3.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
+    //rxjava2
+    compile 'io.reactivex.rxjava2:rxjava:2.1.2'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //retrofit2
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.alibaba:fastjson:1.2.35'
+    compile 'com.google.code.gson:gson:2.8.1'
+    //stetho
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }
 
 //fabric

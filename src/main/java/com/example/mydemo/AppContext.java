@@ -3,13 +3,14 @@ package com.example.mydemo;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.afa.tourism.greendao.gen.DaoMaster;
-import com.afa.tourism.greendao.gen.DaoSession;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.example.mydemo.base.BaseApplication;
+import com.example.mydemo.greendaotdemo.DaoMaster;
+import com.example.mydemo.greendaotdemo.DaoSession;
+import com.facebook.stetho.Stetho;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -33,6 +34,8 @@ public class AppContext extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
+        //方便数据库查看
+        Stetho.initializeWithDefaults(this);
         instance = this;
         queues = Volley.newRequestQueue(this);
     }

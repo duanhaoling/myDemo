@@ -6,7 +6,7 @@
 
         <variable
             name="video"
-            type="com.example.mydemo.greendaotdemo.VideoEntity" />
+            type="com.example.mydemo.greendaotdemo.LocalVideo" />
 
         <variable
             name="presenter"

@@ -1,5 +1,7 @@
 package com.example.mydemo.greendaotdemo;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +17,16 @@ import java.util.List;
 public class DbTestActivity extends AppCompatActivity {
 
     private MyDataBaseHelper dbHelper;
-    private List<VideoEntity> mDatas;
+    private List<LocalVideo> mDatas;
     private ActivityDbTestBinding binding;
-    private VideoEntity entity;
+    private LocalVideo entity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_db_test);
 
-        dbHelper = new MyDataBaseHelper(this, "BookStore.db", null, 1);
+        dbHelper = new MyDataBaseHelper(this, "BookStore.db", null, 2);
 
         binding.setPresenter(new Presenter());
         binding.createDatabase.setOnClickListener(view -> {
@@ -35,7 +37,7 @@ public class DbTestActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        entity = new VideoEntity();
+        entity = new LocalVideo();
         entity.setFileName("videofile");
         entity.setLatitude("80.88 ");
         entity.setLongitude("110.90");
@@ -54,11 +56,36 @@ public class DbTestActivity extends AppCompatActivity {
                 //viewstub在以下方法调用的时候inflate，且只可以inflate一次
                 binding.viewstub.getViewStub().inflate();
             }
-            Toast.makeText(DbTestActivity.this, "hello world", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DbTestActivity.this, "hello viewstub ,only inflate once", Toast.LENGTH_SHORT).show();
         }
 
-        public void onClickBinding(VideoEntity entity) {
+        public void onClickBinding(LocalVideo entity) {
             Toast.makeText(DbTestActivity.this, "文件名：" + entity.getFileName(), Toast.LENGTH_SHORT).show();
+        }
+
+        public void insertData() {
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            // 开始组装第一条数据
+            values.put("name", "The Da Vinci Code");
+            values.put("author", "Dan Brown");
+            values.put("pages", 454);
+            values.put("price", 16.96);
+            db.insert("Book", null, values); // 插入第一条数据 values.clear();
+            // 开始组装第二条数据
+            values.put("name", "The Lost Symbol");
+            values.put("author", "Dan Brown");
+            values.put("pages", 510);
+            values.put("price", 19.95);
+            db.insert("Book", null, values); // 插入第二条数据
+        }
+
+        public void query() {
+            Toast.makeText(DbTestActivity.this, "数据查询", Toast.LENGTH_SHORT).show();
+        }
+
+        public void update() {
+
         }
     }
 
