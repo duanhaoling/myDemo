@@ -191,7 +191,6 @@ public class RxjavaTestActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onNext(Employee.Mission mission) {
                         LogUtil.i(TAG, mission.desc);
-
                     }
 
                     @Override

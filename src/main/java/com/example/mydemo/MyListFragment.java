@@ -18,10 +18,10 @@ import com.example.mydemo.greendaotdemo.DbTestActivity;
 import com.example.mydemo.material.CoordActivity;
 import com.example.mydemo.popu.LiuyanActivity;
 import com.example.mydemo.remoteview.ReceiveNotificationActivity;
+import com.example.mydemo.retrofit.NetTestActivity;
 import com.example.mydemo.test_java.RxjavaTestActivity;
 import com.example.mydemo.timer.TimerDemoActivity;
 import com.example.mydemo.viewflipper.ViewFlipperActivity;
-import com.example.mydemo.volley.VolleyActivity;
 import com.example.mydemo.webview.WebViewDemo;
 import com.example.mydemo.webview.WebViewDemo2;
 
@@ -38,7 +38,7 @@ public class MyListFragment extends ListFragment {
     private final String[] ss = new String[]{
             "MyListActivity",
             "TimerDemoActivity",
-            "VolleyActivity",
+            "NetTestActivity",
             "AnimationActivity",
             "WebViewDemo",
             "WebViewDemo2",
@@ -78,7 +78,7 @@ public class MyListFragment extends ListFragment {
                 gotoActivity(TimerDemoActivity.class);
                 break;
             case 2:
-                gotoActivity(VolleyActivity.class);
+                gotoActivity(NetTestActivity.class);
                 break;
             case 3:
                 gotoActivity(AnimationActivity.class);

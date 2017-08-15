@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:onClick="@{presenter.onClick}"
+            android:onClick="@{presenter::onClick}"
             android:text='@{"video name:"+video.fileName}'
             android:textSize="16sp" />
 
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="修改视频文件名"
-            android:onTextChanged="@{presenter.onTextChanged}" />
+            android:onTextChanged="@{presenter::onTextChanged}" />
 
 
     </LinearLayout>
