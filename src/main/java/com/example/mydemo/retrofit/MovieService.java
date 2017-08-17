@@ -1,6 +1,9 @@
 package com.example.mydemo.retrofit;
 
-import com.ldh.androidlib.net.HttpResult;
+
+import com.example.mydemo.retrofit.MovieEntity.SubjectsBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -31,7 +34,7 @@ public interface MovieService {
      * @return
      */
     @GET("top250")
-    Observable<com.example.mydemo.retrofit.HttpResult> getTopMovieRxMy(@Query("start") int start, @Query("count") int count);
+    Observable<HttpResult<List<SubjectsBean>>> getTopMovieRxMy(@Query("start") int start, @Query("count") int count);
 
 
     @GET("demo")

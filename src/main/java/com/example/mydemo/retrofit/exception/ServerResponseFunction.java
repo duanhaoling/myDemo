@@ -1,6 +1,6 @@
 package com.example.mydemo.retrofit.exception;
 
-import com.ldh.androidlib.net.HttpResult;
+import com.ldh.androidlib.net.config.HttpResult;
 import com.ldh.androidlib.net.exception.ServerException;
 
 import io.reactivex.annotations.NonNull;
