@@ -38,6 +38,7 @@ public class AppContext extends BaseApplication {
         Stetho.initializeWithDefaults(this);
         instance = this;
         queues = Volley.newRequestQueue(this);
+        setDatabase();
     }
 
     public static RequestQueue getHttpQueses() {

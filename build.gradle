@@ -72,8 +72,8 @@ android {
 //    generateTests：设置自动生成单元测试用例
     greendao {
         schemaVersion 1
-//        daoPackage 'com.afa.tourism.greendao.gen'
-//        targetGenDir 'src/main/java'
+        daoPackage 'com.example.mydemo.greendaotdemo'
+        targetGenDir 'src/main/java'
     }
 
     //使用DataBinding

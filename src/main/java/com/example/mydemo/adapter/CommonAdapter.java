@@ -17,7 +17,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected int mItemLayout;
 
-    public CommonAdapter(Context context,List<T> datas,int layoutId) {
+    public CommonAdapter(Context context, List<T> datas, int layoutId) {
         this.mDatas = datas;
         this.mContext = context;
         mInflater = LayoutInflater.from(context);
@@ -41,7 +41,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder =ViewHolder.get(mContext,convertView,parent, mItemLayout,position);
+        ViewHolder holder = ViewHolder.get(mContext, convertView, parent, mItemLayout, position);
 
         convert(getItem(position), holder);
 

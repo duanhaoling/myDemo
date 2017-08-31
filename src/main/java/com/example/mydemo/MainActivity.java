@@ -12,13 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.ldh.androidlib.view.CommonDialogFragment;
 
 /**
- * Volley的使用
- *volley加载图片
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
 
     @Override
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-
+            showDialog();
         } else if (id == R.id.nav_send) {
 
         }
@@ -109,5 +110,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    private void showDialog() {
+        //这里不可以使用匿名内部类public static
+        CommonDialogFragment.createBuilder(this, getSupportFragmentManager())
+                .setTitle("hello")
+                .setMessage("hello world")
+                .setPositiveButton("yes", (dialog, which) -> {
+                    Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("no", null)
+                .show("test");
     }
 }
