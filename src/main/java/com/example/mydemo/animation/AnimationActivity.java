@@ -1,5 +1,6 @@
 package com.example.mydemo.animation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mydemo.R;
-import com.ldh.androidlib.view.CommonDialogFragment;
+import com.ldh.androidlib.view.dialog.CommonDialogFragment;
 
 /**
  * Created by ldh on 2016/4/25 0025.
@@ -37,6 +38,8 @@ public class AnimationActivity extends AppCompatActivity {
                 .setMessage("hello world")
                 .setPositiveButton("yes", (dialog, which) -> {
                     Toast.makeText(AnimationActivity.this, "hello", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AnimationActivity.this, TestImageLoaderActivity.class);
+                    AnimationActivity.this.startActivity(intent);
                 })
                 .setNegativeButton("no", null)
                 .show("test");

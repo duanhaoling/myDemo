@@ -11,6 +11,7 @@ import com.example.mydemo.base.BaseApplication;
 import com.example.mydemo.greendaotdemo.DaoMaster;
 import com.example.mydemo.greendaotdemo.DaoSession;
 import com.facebook.stetho.Stetho;
+import com.ldh.androidlib.image.ImageLoaderManager;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -38,6 +39,8 @@ public class AppContext extends BaseApplication {
         Stetho.initializeWithDefaults(this);
         instance = this;
         queues = Volley.newRequestQueue(this);
+        //初始化图片加载框架
+        ImageLoaderManager.getInstance().init(this);
         setDatabase();
     }
 

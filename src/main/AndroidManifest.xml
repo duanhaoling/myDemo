@@ -47,6 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".timer.TimerDemoActivity" />
         <activity android:name=".animation.AnimationActivity" />
+        <activity android:name=".animation.TestImageLoaderActivity"/>
         <activity
             android:name=".widget.test.WidgetActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -69,6 +70,7 @@
             android:process=":remote" />
         <activity android:name=".greendaotdemo.DbTestActivity" />
         <activity android:name=".retrofit.NetTestActivity"></activity>
+
     </application>
 
 </manifest>
