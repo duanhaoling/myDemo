@@ -16,8 +16,8 @@ import android.widget.Button;
 import android.widget.RemoteViews;
 
 import com.example.mydemo.R;
-import com.example.mydemo.webview.WebViewDemo;
-import com.example.mydemo.webview.WebViewDemo2;
+import com.example.mydemo.view.webview.WebViewDemo;
+import com.example.mydemo.view.webview.WebViewDemo2;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

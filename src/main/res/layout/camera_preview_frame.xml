@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:layout_weight="1" >
 
-    <com.example.mydemo.camera.ui.PreviewFrameLayout
+    <com.example.mydemo.view.camera.ui.PreviewFrameLayout
         android:id="@+id/frame"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -17,13 +17,13 @@
             android:layout_height="fill_parent" />
 
         <include layout="@layout/focus_indicator" />
-    </com.example.mydemo.camera.ui.PreviewFrameLayout>
-    <com.example.mydemo.camera.gallery.Gallery
+    </com.example.mydemo.view.camera.ui.PreviewFrameLayout>
+    <com.example.mydemo.view.camera.gallery.Gallery
         android:id="@+id/camera_gallery"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:background="@color/translucence"
         >
-    </com.example.mydemo.camera.gallery.Gallery>
+    </com.example.mydemo.view.camera.gallery.Gallery>
 </RelativeLayout>

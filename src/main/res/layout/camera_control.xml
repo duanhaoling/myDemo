@@ -19,7 +19,7 @@
         android:text="@string/alert_dialog_cancel"
         android:textColor="@color/text_color_black" />
 
-    <com.example.mydemo.camera.ui.ShutterButton
+    <com.example.mydemo.view.camera.ui.ShutterButton
         android:id="@+id/shutter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

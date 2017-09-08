@@ -19,7 +19,7 @@
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:layout_centerInParent="true">
-    <com.example.mydemo.camera.ui.FocusIndicatorView
+    <com.example.mydemo.view.camera.ui.FocusIndicatorView
         android:id="@+id/focus_indicator"
         android:layout_height="120dp"
         android:layout_width="120dp"/>

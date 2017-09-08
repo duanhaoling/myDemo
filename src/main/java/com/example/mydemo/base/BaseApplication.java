@@ -41,7 +41,8 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(base);
+        //解决64k方法NoClassDefFoundError
+        MultiDex.install(base);  //另一种方式，继承MultiDexApplication
     }
 
     @Override

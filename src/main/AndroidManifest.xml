@@ -39,37 +39,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".webview.WebViewDemo" />
-        <activity android:name=".webview.WebViewDemo2" />
-        <activity android:name=".volley.VolleyActivity" />
+        <activity android:name=".view.webview.WebViewDemo" />
+        <activity android:name=".view.webview.WebViewDemo2" />
+        <activity android:name=".net.volley.VolleyActivity" />
         <activity
-            android:name=".adapter.MyListActivity"
+            android:name=".view.adapter.MyListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".timer.TimerDemoActivity" />
-        <activity android:name=".animation.AnimationActivity" />
-        <activity android:name=".animation.TestImageLoaderActivity"/>
+        <activity android:name=".view.timer.TimerDemoActivity" />
+        <activity android:name=".view.animation.AnimationActivity" />
+        <activity android:name=".view.animation.TestImageLoaderActivity"/>
         <activity
             android:name=".widget.test.WidgetActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".material.CoordActivity"
+            android:name=".view.material.CoordActivity"
             android:theme="@style/CoordinatorStyle" />
-        <activity android:name=".popu.LiuyanActivity" />
+        <activity android:name=".view.popu.LiuyanActivity" />
         <activity
-            android:name=".viewflipper.ViewFlipperActivity"
+            android:name=".view.viewflipper.ViewFlipperActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name=".service.DownloadService" />
 
-        <activity android:name=".camera.CameraActivity" />
-        <activity android:name=".test_java.RxjavaTestActivity" />
+        <activity android:name=".view.camera.CameraActivity" />
+        <activity android:name=".rx.rxjava.RxjavaTestActivity" />
         <activity android:name=".fileprovider_client.FileProviderTestActivity" />
         <activity android:name=".remoteview.NotificationTestActivity" />
         <activity
             android:name=".remoteview.ReceiveNotificationActivity"
             android:process=":remote" />
         <activity android:name=".greendaotdemo.DbTestActivity" />
-        <activity android:name=".retrofit.NetTestActivity"></activity>
+        <activity android:name=".rx.retrofit.NetTestActivity"></activity>
 
     </application>
 

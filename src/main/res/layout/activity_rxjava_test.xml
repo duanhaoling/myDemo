@@ -10,7 +10,7 @@
         android:id="@+id/activity_rxjava_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.mydemo.test_java.RxjavaTestActivity">
+        tools:context=".rx.rxjava.RxjavaTestActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
