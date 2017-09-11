@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.mydemo.R;
-import com.example.mydemo.interf.DialogControl;
+import com.example.mydemo.base.DialogControl;
 import com.example.mydemo.util.TDevice;
 
 

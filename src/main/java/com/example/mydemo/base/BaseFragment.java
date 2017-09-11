@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.mydemo.AppContext;
 import com.example.mydemo.R;
-import com.example.mydemo.interf.BaseFragmentInterface;
-import com.example.mydemo.interf.DialogControl;
 import com.example.mydemo.widget.WaitDialog;
 
 /**
  * Created by ldh on 2016/5/24 0024.
  */
-public class BaseFragment extends Fragment implements BaseFragmentInterface,View.OnClickListener{
+public class BaseFragment extends Fragment implements BaseFragmentInterface, View.OnClickListener {
 
     public static final int STATE_NONE = 0;
     public static final int STATE_REFRESH = 1;

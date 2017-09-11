@@ -21,7 +21,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.example.mydemo.R;
-import com.example.mydemo.view.camera.FocusIndicator;
 
 
 // A view that indicates the focus area or the metering area.

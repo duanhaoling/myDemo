@@ -7,18 +7,20 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.mydemo.base.BaseActivity;
+import com.example.mydemo.view.DialogActivity;
+import com.example.mydemo.view.camera.CameraActivity;
 import com.ldh.androidlib.view.dialog.demo.CommonDialogFragment;
 
 /**
  */
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -81,7 +83,16 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            gotoActivity(CameraActivity.class);
             return true;
+        }
+
+        if (id == R.id.nav_share) {
+            showDialog();
+        }
+
+        if (id == R.id.nav_send) {
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -102,7 +113,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-            showDialog();
+
         } else if (id == R.id.nav_send) {
 
         }
@@ -114,6 +125,9 @@ public class MainActivity extends AppCompatActivity
 
 
     private void showDialog() {
+        gotoActivity(DialogActivity.class);
+
+        if (true) return;
         //这里不可以使用匿名内部类public static
         CommonDialogFragment.createBuilder(this, getSupportFragmentManager())
                 .setTitle("hello")
@@ -123,5 +137,6 @@ public class MainActivity extends AppCompatActivity
                 })
                 .setNegativeButton("no", null)
                 .show("test");
+
     }
 }

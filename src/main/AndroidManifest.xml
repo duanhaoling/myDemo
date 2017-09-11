@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.timer.TimerDemoActivity" />
         <activity android:name=".view.animation.AnimationActivity" />
-        <activity android:name=".view.animation.TestImageLoaderActivity"/>
+        <activity android:name=".view.animation.TestImageLoaderActivity" />
         <activity
             android:name=".widget.test.WidgetActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -69,8 +69,8 @@
             android:name=".remoteview.ReceiveNotificationActivity"
             android:process=":remote" />
         <activity android:name=".greendaotdemo.DbTestActivity" />
-        <activity android:name=".rx.retrofit.NetTestActivity"></activity>
-
+        <activity android:name=".rx.retrofit.NetTestActivity" />
+        <activity android:name=".view.DialogActivity"></activity>
     </application>
 
 </manifest>

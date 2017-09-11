@@ -26,6 +26,8 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
 
+//    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         applicationId "com.example.mydemo"
         minSdkVersion 16
@@ -102,7 +104,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
 
     //私有库
 //    compile project(':androidlib')
@@ -117,12 +118,13 @@ dependencies {
         transitive = true;
     }
 
+
+
+
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-
     compile 'com.android.support:multidex:1.0.1'
-
-
+    testCompile 'junit:junit:4.12'
 }
 //fabric
 crashlytics {

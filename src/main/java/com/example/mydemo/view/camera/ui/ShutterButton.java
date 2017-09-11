@@ -18,13 +18,12 @@ package com.example.mydemo.view.camera.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 /**
  * A button designed to be used for the on-screen shutter button. It's currently
  * an {@code ImageView} that can call a delegate when the pressed state changes.
  */
-public class ShutterButton extends ImageView {
+public class ShutterButton extends android.support.v7.widget.AppCompatImageView {
     /**
      * A callback to be invoked when a ShutterButton's pressed state changes.
      */
