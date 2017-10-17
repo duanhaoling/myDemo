@@ -34,6 +34,9 @@
     <string name="dialog_ok">确定</string>
     <string name="alert_dialog_cancel">取消</string>
     <string name="alert_dialog_ok">确定</string>
+    <string name="title_activity_annotaion">AnnotaionActivity</string>
+
+    <string name="image_file_name_format" translatable="false">"yyyyMMdd-HH-mm-ss"</string>
 
 
 </resources>

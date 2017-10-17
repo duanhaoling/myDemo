@@ -1,6 +1,10 @@
 package com.example.mydemo;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -15,14 +19,22 @@ import android.widget.Toast;
 
 import com.example.mydemo.base.BaseActivity;
 import com.example.mydemo.view.DialogActivity;
-import com.example.mydemo.view.camera.CameraActivity;
+import com.ldh.androidlib.adaptive.FileProvider7;
 import com.ldh.androidlib.view.dialog.demo.CommonDialogFragment;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  */
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private static final int REQUEST_CODE_TAKE_PHOTO = 0x100;
+    private String mCurrentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +95,7 @@ public class MainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            gotoActivity(CameraActivity.class);
-            return true;
+
         }
 
         if (id == R.id.nav_share) {
@@ -105,7 +116,8 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            takePhotoNoCompress();
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -121,6 +133,20 @@ public class MainActivity extends BaseActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void takePhotoNoCompress() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            String filename = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA)
+                    .format(new Date()) + ".png";
+            File file = new File(Environment.getExternalStorageDirectory(), filename);
+            mCurrentPhotoPath = file.getAbsolutePath();
+
+            Uri fileUri = FileProvider7.getUriForFile(this, file);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);
+        }
     }
 
 

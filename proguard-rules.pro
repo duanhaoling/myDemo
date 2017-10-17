@@ -7,15 +7,7 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# Add any project specific keep options here:
-
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
+# Add any
 # 指定代码的压缩级别
 -optimizationpasses 5
 # 是否使用大小写混合
@@ -157,3 +149,155 @@
 -keep class com.nostra13.universalimageloader.** { *; }
 -keep class com.android.volley.** {*; }
 -keep class org.apache.http.** {*; }
+
+#project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+   public *;
+}
+
+
+#######################BaseRecyclerViewAdapterHelper#######################
+-keep class com.chad.library.adapter.** {
+*;
+}
+-keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
+-keep public class * extends com.chad.library.adapter.base.BaseViewHolder
+-keepclassmembers public class * extends com.chad.library.adapter.base.BaseViewHolder {
+     <init>(android.view.View);
+}
+
+# support-v7-appcompat
+-keep public class android.support.v7.widget.** { *; }
+-keep public class android.support.v7.internal.widget.** { *; }
+-keep public class android.support.v7.internal.view.menu.** { *; }
+-keep public class * extends android.support.v4.view.ActionProvider {
+    public <init>(android.content.Context);
+}
+
+#######################greenDAO#######################
+-keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
+public static java.lang.String TABLENAME;
+}
+-keep class **$Properties
+# If you do not use SQLCipher:
+-dontwarn org.greenrobot.greendao.database.**
+# If you do not use Rx:
+-dontwarn rx.**
+
+#retrolambda
+-dontwarn java.lang.invoke.**
+-keep class java.lang.invoke.** {
+    *;
+}
+-keepclassmembers class java.lang.invoke.** {
+    *;
+}
+#-keepclassmembers class ** {
+#    *** access$*(***);
+#    *** *$*();
+#}
+
+#ImageLoader的实现类
+-keep class * implements com.anjuke.android.newbroker.manager.imageloader.ImageLoader
+#rules for fresco
+-dontwarn javax.annotation.**
+
+#RxJava
+-dontwarn sun.misc.**
+-keepclassmembers class rx.reactivex.internal.util.unsafe.*ArrayQueue*Field* {
+   long producerIndex;
+   long consumerIndex;
+}
+-keepclassmembers class rx.reactivex.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.reactivex.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.reactivex.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.reactivex.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+
+# RxJava
+-dontwarn io.**
+-keep class io.**  {* ;}
+-dontwarn sun.misc.Unsafe
+
+# RxAndroid
+-dontwarn rx.reactivex.android.**
+-keep class rx.reactivex.android.**  {* ;}
+
+#fabric
+-keep public class * extends java.lang.Exception
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+
+########################Fresco#######################
+-keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
+
+# Do not strip any method/class that is annotated with @DoNotStrip
+-keep @com.facebook.common.internal.DoNotStrip class *
+-keepclassmembers class * {
+    @com.facebook.common.internal.DoNotStrip *;
+}
+
+# Keep native methods
+-keepclassmembers class * {
+    native <methods>;
+}
+
+# Works around a bug in the animated GIF module which will be fixed in 0.12.0
+-keep class com.facebook.imagepipeline.animated.factory.AnimatedFactoryImpl {
+    public AnimatedFactoryImpl(com.facebook.imagepipeline.bitmaps.PlatformBitmapFactory,com.facebook.imagepipeline.core.ExecutorSupplier);
+}
+
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn okhttp3.**
+-dontwarn javax.annotation.**
+-dontwarn com.android.volley.toolbox.**
+
+#######################FastJson#######################
+-keep class com.alibaba.fastjson.** { *; }
+-keep public class * implements java.io.Serializable {
+        public *;
+}
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+-dontwarn com.alibaba.fastjson.**
+
+#######################ButterKnife#######################
+-keep class butterknife.** { *; }
+-keep class **$$ViewBinder { *; } #新版的butterknife7.x生成的类
+#-keep class **$$ViewInjector { *; } #老版的butterknife6.x-生成的类
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+-dontwarn butterknife.internal.**
+
+# Works around a bug in the animated GIF module which will be fixed in 0.12.0
+-keep class com.facebook.imagepipeline.animated.factory.AnimatedFactoryImpl {
+    public AnimatedFactoryImpl(com.facebook.imagepipeline.bitmaps.PlatformBitmapFactory,com.facebook.imagepipeline.core.ExecutorSupplier);
+}
+
+#######################Fresco,FastJson,ButterKnife的dontwarn配置#######################
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp.**
+-dontwarn okhttp3.**
+-dontwarn javax.annotation.**
+-dontwarn com.android.volley.toolbox.**
+-dontwarn javax.lang.model.**
+-dontwarn butterknife.internal.**
+

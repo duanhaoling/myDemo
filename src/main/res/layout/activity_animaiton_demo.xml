@@ -2,19 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/image"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_launcher"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="你占领的朝阳-酒仙桥 商圈五房源可展示，请马上发布新房  你占领的朝阳-酒仙桥 商圈五房源可展示，请马上发布新房"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/ajkH3Font" />
 
     <Button
-        android:onClick="onClick"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:text="Animation"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:text="Animation" />
 
 </RelativeLayout>

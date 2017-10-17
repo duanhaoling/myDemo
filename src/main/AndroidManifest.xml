@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".AppContext"
@@ -15,7 +16,10 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="e6c6ff9086549350c2f37ca72a48653b1e08e79c" />
+            android:value="${fabric_apikey}" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <receiver android:name=".remoteview.MyAppWidgetProvider">
             <meta-data
@@ -61,7 +65,6 @@
 
         <service android:name=".service.DownloadService" />
 
-        <activity android:name=".view.camera.CameraActivity" />
         <activity android:name=".rx.rxjava.RxjavaTestActivity" />
         <activity android:name=".fileprovider_client.FileProviderTestActivity" />
         <activity android:name=".remoteview.NotificationTestActivity" />
@@ -70,7 +73,11 @@
             android:process=":remote" />
         <activity android:name=".greendaotdemo.DbTestActivity" />
         <activity android:name=".rx.retrofit.NetTestActivity" />
-        <activity android:name=".view.DialogActivity"></activity>
+        <activity android:name=".view.DialogActivity" />
+        <activity
+            android:name=".annotation.AnnotaionActivity"
+            android:label="@string/title_activity_annotaion"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

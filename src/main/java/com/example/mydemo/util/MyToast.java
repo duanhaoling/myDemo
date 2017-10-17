@@ -12,7 +12,7 @@ public class MyToast {
      * 单例吐司
      */
     private static Toast toast;
-    private static boolean isDebug = true;
+    private static boolean isDebug = false;
 
     public static void showtoast(Context context,String s) {
 

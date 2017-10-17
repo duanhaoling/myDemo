@@ -5,15 +5,16 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Picture;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,26 +96,27 @@ public class WebViewDemo extends AppCompatActivity {
         wv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);//滚动条风格，为0指滚动条不占用空间，直接覆盖在网页上
 
 
-// 设置WebViewClient对象
+        // 设置WebViewClient对象
         wv.setWebViewClient(wvc);
 
-// 设置setWebChromeClient对象
+        // 设置setWebChromeClient对象
         wv.setWebChromeClient(wvcc);
 
-//加载网页
+        //加载网页
         wv.loadUrl("file:///android_asset/demo1.html");
 
         //添加js调用Android代码支持1
-        wv.addJavascriptInterface(new JavaScriptInterface(this),"JavaScriptInterface");
+        wv.addJavascriptInterface(new JavaScriptInterface(this), "JavaScriptInterface");
 
         //添加js调用Android代码支持2
-        wv.addJavascriptInterface(new JavaScriptInter(){
+        wv.addJavascriptInterface(new JavaScriptInter() {
             @JavascriptInterface
             //此处一定要添加该注解，否则在4.1+系统上运行失败
             @Override
             public void onJsCallAndroid() {
                 Toast.makeText(WebViewDemo.this, "Js调用安卓代码", Toast.LENGTH_SHORT).show();
             }
+
             @JavascriptInterface
             @Override
             public void callAndroidMethod(int a, float b, String c, boolean d) {
@@ -128,13 +130,14 @@ public class WebViewDemo extends AppCompatActivity {
         }, "demo");
     }
 
-    public interface JavaScriptInter{
+    public interface JavaScriptInter {
         void onJsCallAndroid();
-        void callAndroidMethod(int a, float b,String c,boolean d);
+
+        void callAndroidMethod(int a, float b, String c, boolean d);
     }
 
     private void initActionBar() {
-        ActionBar actionBar =getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
@@ -143,7 +146,7 @@ public class WebViewDemo extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId()==android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -154,56 +157,49 @@ public class WebViewDemo extends AppCompatActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            MyToast.showtoast(WebViewDemo.this,"WebViewClient.shouldOverrideUrlLoading");
-            if (!TextUtils.isEmpty(url) && url.startsWith("call-app-method://clickShareButton")) {
-                Toast.makeText(WebViewDemo.this, url, Toast.LENGTH_SHORT).show();
-                return true;
+//            MyToast.showtoast(WebViewDemo.this, "WebViewClient.shouldOverrideUrlLoading");
+//            if (!TextUtils.isEmpty(url) && url.startsWith("call-app-method://clickShareButton")) {
+//                Toast.makeText(WebViewDemo.this, url, Toast.LENGTH_SHORT).show();
+//                return true;
+//            }
+            if (url.startsWith("http:") || url.startsWith("https:")) {
+                return false;
             }
-// 使用自己的WebView组件来响应Url加载事件，而不是使用默认浏览器器加载页面
-            wv.loadUrl(url);
-// 记得消耗掉这个事件。给不知道的朋友再解释一下，Android中返回True的意思就是到此为止吧,事件就会不会冒泡传递了，我们称之为消耗掉
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+            // 使用自己的WebView组件来响应Url加载事件，而不是使用默认浏览器器加载页面
+            //  下面这一行保留的时候，原网页仍报错，新网页正常.所以注释掉后，也就没问题了
+            //   view.loadUrl(url);
+            // 记得消耗掉这个事件。给不知道的朋友再解释一下，Android中返回True的意思就是到此为止吧,事件就会不会冒泡传递了，我们称之为消耗掉
             return true;
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            MyToast.showtoast(WebViewDemo.this,"WebViewClient.onPageStarted");
-            super.onPageStarted(view, url, favicon);
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            MyToast.showtoast(WebViewDemo.this,"WebViewClient.onPageFinished");
-            super.onPageFinished(view, url);
-        }
-
-        @Override
-        public void onLoadResource(WebView view, String url) {
-            MyToast.showtoast(WebViewDemo.this,"WebViewClient.onLoadResource");
-            super.onLoadResource(view, url);
         }
 
     };
 
-// 创建WebViewChromeClient
-
-
+    // 创建WebViewChromeClient
     WebChromeClient wvcc = new WebChromeClient() {
         //处理进度条
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
-            MyToast.showtoast(WebViewDemo.this,"正在加载中");
+            MyToast.showtoast(WebViewDemo.this, "正在加载中");
             if (newProgress == 100) {
                 handler.sendEmptyMessage(1);// 如果全部载入,隐藏进度对话框
             }
             super.onProgressChanged(view, newProgress);
         }
-        // 处理Alert事件
 
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            //可以用onReceivedTitle()方法修改网页标题
+            WebViewDemo.this.setTitle(title);
+            super.onReceivedTitle(view, title);
+        }
+
+        // 处理Alert事件
         @Override
         public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
 
-// 构建一个Builder来显示网页中的alert对话框
+            // 构建一个Builder来显示网页中的alert对话框
             Builder builder = new Builder(WebViewDemo.this);
             builder.setTitle("计算1+2的值");
             builder.setMessage(message);
@@ -222,17 +218,7 @@ public class WebViewDemo extends AppCompatActivity {
             return true;
         }
 
-        @Override
-        public void onReceivedTitle(WebView view, String title) {
-            //可以用onReceivedTitle()方法修改网页标题
-            WebViewDemo.this.setTitle(title);
-
-            super.onReceivedTitle(view, title);
-
-        }
-
-// 处理Confirm事件
-
+        // 处理Confirm事件
         @Override
         public boolean onJsConfirm(WebView view, String url, String message, final JsResult result) {
 
@@ -265,21 +251,17 @@ public class WebViewDemo extends AppCompatActivity {
 
         }
 
-// 处理提示事件
-
+        // 处理提示事件
         @Override
-        public boolean onJsPrompt(WebView view, String url, String message, String defaultValue,
-
-                                  JsPromptResult result) {
-
-// 看看默认的效果
+        public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+            // 看看默认的效果
             return super.onJsPrompt(view, url, message, defaultValue, result);
         }
     };
 
     private static Handler handler = new Handler() {
         public void handleMessage(Message msg) {// 定义一个Handler，用于处理下载线程与UI间通讯
-            if (!Thread.currentThread().isInterrupted()){
+            if (!Thread.currentThread().isInterrupted()) {
                 switch (msg.what) {
                     case 0:
 //                        pd.show();// 显示进度对话框
@@ -292,19 +274,17 @@ public class WebViewDemo extends AppCompatActivity {
             super.handleMessage(msg);
         }
     };
+
     private void initEvents() {
         b1.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
-
 // 加载URL assets目录下的内容可以用 "[url=file:///android_asset]file:///android_asset[/url]" 前缀
 
 //                wv.loadUrl("[url=file:///android_asset/html/test1.html]file:///android_asset/html/test1.html[/url]");
 //                wv.loadUrl("http://www.baidu.com");
                 String color = "#00ee00";
-                wv.loadUrl("Javascript:changeColor('"+color+"');");
+                wv.loadUrl("Javascript:changeColor('" + color + "');");
             }
 
         });
@@ -315,8 +295,6 @@ public class WebViewDemo extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-
 // 加载URL assets目录下的内容可以用 "[url=file:///android_asset]file:///android_asset[/url]" 前缀
 
 //                wv.loadUrl("[url=file:///android_asset/html/test3.html]file:///android_asset/html/test3.html[/url]");

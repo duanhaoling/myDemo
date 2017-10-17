@@ -1,14 +1,14 @@
-    <!DOCTYPE html>   
-    <html>   
-        <head>   
-        <title>Page Title</title>   
-          
-        <meta name="viewport" content="width=device-width, initial-scale=1">   
-      
-        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />  
-        <script src="js/jquery.js"></script>  
-        <script src="js/jquery.mobile-1.1.1.min.js"></script>
-            <script type="text/javascript">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css"/>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.1.1.min.js"></script>
+    <script type="text/javascript">
     var result = JavaScriptInterface.jsontohtml();
     var obj = eval("("+result+")");//解析json字符串
     function showAndroidToast(toast)
@@ -34,29 +34,45 @@
     function changeColor(color){
         document.body.style.backgroundColor = color ;
     }
-    </script>
-        </head>
 
-    <body>
-    <div data-role="page" >
-        <div data-role="header" data-theme="c">
-            <h1 onclick="window.demo.onJsCallAndroid()">Android via Interface</h1>
-        </div><!-- /header -->
-        <div data-role="content">
-            <h2 value="say hello" onclick="showAndroidToast('Hello,Android!')" data-theme="e">say hello</h2>
-            <button value="get json data" onclick="getjsonData()" data-theme="e">get json data</button>
-        </div><!-- /content -->
-        <div data-role="collapsible" data-theme="c" data-content-theme="f">
-            <h3 onclick="window.demo.callAndroidMethod(100,100,'ccc',true)">I'm <script>document.write(obj[0].name);</script>,click to see my info</h3>
-            <p><script>document.write("<p>name:"+obj[0].name+"</p>");</script></p>
-            <p><script>document.write("<p>age:"+obj[0].age+"</p>");</script></p>
-            <p><script>document.write("<p>address:"+obj[0].address+"</p>");</script></p>
-        </div>
-        <div data-role="footer" data-theme="c">
-            <a href="call-app-method://clickShareButton?title='title'&description='description'&imageUrl='xxx'&webpageUrl='www.baidu.com'">click to share</a>
-            <h4 onclick="changeColor('#00ffee')">Page Footer</h4>
-        </div><!-- /footer -->
-    </div><!-- /page -->
-      
-    </body>  
-    </html>  
+    </script>
+</head>
+
+<body>
+<div data-role="page">
+    <div data-role="header" data-theme="c">
+        <h1 onclick="window.demo.onJsCallAndroid()">Android via Interface</h1>
+    </div><!-- /header -->
+
+    <div data-role="collapsible" data-theme="c" data-content-theme="f">
+        <h3 onclick="window.demo.callAndroidMethod(100,100,'ccc',true)">I'm
+            <script>document.write(obj[0].name);</script>
+            ,click to see my info
+        </h3>
+        <p>
+            <script>document.write("<p>name:"+obj[0].name+"</p>");</script>
+        </p>
+        <p>
+            <script>document.write("<p>age:"+obj[0].age+"</p>");</script>
+        </p>
+        <p>
+            <script>document.write("<p>address:"+obj[0].address+"</p>");</script>
+        </p>
+    </div>
+
+    <div data-role="content">
+        <h2 value="say hello" onclick="showAndroidToast('Hello,Android!')" data-theme="e">say
+            hello</h2>
+        <button value="get json data" onclick="getjsonData()" data-theme="e">get json data</button>
+    </div><!-- /content -->
+
+    <!--url拦截-->
+    <div data-role="footer" data-theme="c">
+        <a href="call-app-method://clickShareButton?title='title'&description='description'&imageUrl='xxx'&webpageUrl='www.baidu.com'">click
+            to share</a>
+        <h4 onclick="changeColor('#00ffee')">Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

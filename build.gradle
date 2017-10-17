@@ -23,8 +23,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
 //    useLibrary 'org.apache.http.legacy'
 
@@ -36,39 +36,41 @@ android {
         versionName "1.0"
 
         multiDexEnabled true            //开启multiDex
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86'    //只支持armeabi-v7a和x86，减小安装包体积
+        }
     }
     dexOptions {
         jumboMode = true
         // here heap size give 4g i got this thing from https://groups.google.com/forum/#!topic/adt-dev/P_TLBTyFWVY
-
         javaMaxHeapSize "4g"
     }
 
     signingConfigs {
-        /*
-        releasebuild {
-            keyAlias 'hellotest'
-            keyPassword 'hellotest'
-            storeFile file('path to keystore')
-            storePassword 'hellotest'
+        release {
+            try {
+                storeFile file("./keystore/release.keystore")
+                storePassword "123456"
+                keyAlias "moon"
+                keyPassword "111111"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
         }
-        */
+        debug {
+            storeFile file("./keystore/debug.keystore")
+            storePassword "123456"
+            keyAlias "moon"
+            keyPassword "111111"
+        }
     }
     buildTypes {
-        debug {
-            //log相关
-            buildConfigField "boolean", "LOG_DEBUG", "true"
-
-            manifestPlaceholders = [fabric_apikey: ""]
-
-//            signingConfig signingConfigs.debug
-            debuggable true
-            jniDebuggable true
-        }
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
+            manifestPlaceholders = [fabric_apikey: "e6c6ff9086549350c2f37ca72a48653b1e08e79c"]
 
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             shrinkResources true    //移除无用的资源文件
             zipAlignEnabled true    //Zipalign优化
             minifyEnabled true      //混淆编译
@@ -76,6 +78,17 @@ android {
 
             debuggable false
             jniDebuggable false
+        }
+
+        debug {
+            //log相关
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+
+            manifestPlaceholders = [fabric_apikey: "e6c6ff9086549350c2f37ca72a48653b1e08e79c"]
+
+            signingConfig signingConfigs.debug
+            debuggable true
+            jniDebuggable true
         }
     }
     compileOptions {
@@ -98,18 +111,36 @@ android {
     dataBinding {
         enabled = true
     }
+    //禁止 Gradle 检查png的合法性
+    aaptOptions {
+        cruncherEnabled false
+    }
+
+    //use to test flavors support
+    productFlavors {
+        kuan {}
+        xiaomi {}
+//        qh360 {}
+//        baidu {}
+//        wandoujia {}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+//    所谓ProductFlavors其实就是可定义的产品特性，
+//    配合 manifest merger 使用的时候就可以达成在一次编译过程中产生多个具有自己特性配置的版本。
+//     上面这个配置的作用就是，为每个渠道包产生不同的 UMENG_CHANNEL_VALUE 的值。
 }
 
 
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
     //私有库
-//    compile project(':androidlib')
+    //    compile project(':androidlib')
     debugCompile project(path: ':androidlib', configuration: 'debug')
     releaseCompile project(path: ':androidlib', configuration: 'release')
-
     //fabric
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
@@ -117,14 +148,11 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
         transitive = true;
     }
-
-
-
-
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.auto.service:auto-service:1.0-rc3'
 }
 //fabric
 crashlytics {
