@@ -15,6 +15,7 @@ import com.example.mydemo.view.adapter.MyListActivity;
 import com.example.mydemo.view.animation.AnimationActivity;
 import com.example.mydemo.fileprovider_client.FileProviderTestActivity;
 import com.example.mydemo.greendaotdemo.DbTestActivity;
+import com.example.mydemo.view.dragview.DragViewactivity;
 import com.example.mydemo.view.material.CoordActivity;
 import com.example.mydemo.view.popu.LiuyanActivity;
 import com.example.mydemo.remoteview.ReceiveNotificationActivity;
@@ -48,7 +49,8 @@ public class MyListFragment extends ListFragment {
             "Notification",
             "FileProviderTest",
             "RxjavaTest",
-            "DatabaseTest"
+            "DatabaseTest",
+            "优雅实现拖拽填空题"
     };
 
 
@@ -113,6 +115,10 @@ public class MyListFragment extends ListFragment {
                 break;
             case 12:
                 gotoActivity(DbTestActivity.class);
+                break;
+            case 13:
+                gotoActivity(DragViewactivity.class);
+                break;
             default:
                 break;
         }

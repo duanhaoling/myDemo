@@ -151,8 +151,8 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:multidex:1.0.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.google.auto.service:auto-service:1.0-rc3'
+    testCompile 'junit:junit:4.12'
 }
 //fabric
 crashlytics {
