@@ -706,7 +706,7 @@ public class TDevice {
 	if (nType == ConnectivityManager.TYPE_MOBILE) {
 	    String extraInfo = networkInfo.getExtraInfo();
 	    if (!StringUtils.isEmpty(extraInfo)) {
-		if (extraInfo.toLowerCase().equals("cmnet")) {
+		if (extraInfo.equalsIgnoreCase("cmnet")) {
 		    netType = NETTYPE_CMNET;
 		} else {
 		    netType = NETTYPE_CMWAP;

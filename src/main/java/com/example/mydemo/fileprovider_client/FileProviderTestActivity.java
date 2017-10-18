@@ -156,6 +156,12 @@ public class FileProviderTestActivity extends AppCompatActivity {
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+            }finally {
+                try {
+                    fr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             if (content.length() != 0) {

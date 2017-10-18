@@ -4,7 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.mydemo.BuildConfig;
+
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
+
 
 /**
  * Created by ldh on 2017/7/18.
@@ -12,17 +15,13 @@ import org.greenrobot.greendao.identityscope.IdentityScopeType;
 
 public class DaoManager {
     private static final String DB_NAME = "videoupload.db";
-    private static Context sContext;
-    private static DaoMaster.DevOpenHelper sHelper;
-    private static DaoMaster sMaster;
-    private static DaoSession sSession;
+    private Context sContext;
+    private DaoMaster.DevOpenHelper sHelper;
+    private DaoMaster sMaster;
+    private DaoSession sSession;
     private SQLiteDatabase db;
 
-    private DaoManager() {
-        //no instance
-    }
-
-    public static void init(Context appContext) {
+    public void init(Context appContext) {
 
         //avoid null pointer exception
         if (appContext == null) return;
@@ -40,25 +39,26 @@ public class DaoManager {
             sMaster = new DaoMaster(sHelper.getWritableDatabase());
             sSession = sMaster.newSession();
         } catch (Exception e) {
-            Log.e("_upload_", (e != null ? e.getMessage() : ""));
+            if (BuildConfig.DEBUG)
+                Log.e("_upload_", (e != null ? e.getMessage() : ""));
         }
     }
 
-    public static DaoMaster.DevOpenHelper getHelper() {
+    public DaoMaster.DevOpenHelper getHelper() {
         if (sHelper == null) {
             sHelper = new DaoMaster.DevOpenHelper(sContext, DB_NAME);
         }
         return sHelper;
     }
 
-    public static DaoMaster getMaster() {
+    public DaoMaster getMaster() {
         if (sMaster == null) {
             sMaster = new DaoMaster(getHelper().getWritableDatabase());
         }
         return sMaster;
     }
 
-    public static DaoSession getSession() {
+    public DaoSession getSession() {
         //查询出来的数据和数据库数据不一致 (可能是greenDAO缓存导致, 因此改成每次使用一个新的session来操作数据库)
         if (sSession == null) {
             sSession = getMaster().newSession(IdentityScopeType.None);

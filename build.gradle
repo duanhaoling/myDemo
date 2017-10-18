@@ -29,7 +29,7 @@ android {
 //    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.example.mydemo"
+        applicationId 'com.ldh.mydemo'
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
@@ -49,14 +49,13 @@ android {
 
     signingConfigs {
         release {
-            try {
-                storeFile file("./keystore/release.keystore")
-                storePassword "123456"
-                keyAlias "moon"
-                keyPassword "111111"
-            } catch (ex) {
-                throw new InvalidUserDataException(ex.toString())
-            }
+            def keystorePropertiesFile = rootProject.file("keystore.properties")
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
         debug {
             storeFile file("./keystore/debug.keystore")
@@ -78,6 +77,7 @@ android {
 
             debuggable false
             jniDebuggable false
+            applicationIdSuffix '.release'
         }
 
         debug {
@@ -89,6 +89,7 @@ android {
             signingConfig signingConfigs.debug
             debuggable true
             jniDebuggable true
+            applicationIdSuffix '.debug'
         }
     }
     compileOptions {
@@ -118,19 +119,34 @@ android {
 
     //use to test flavors support
     productFlavors {
-        kuan {}
+        oppo {}
         xiaomi {}
-//        qh360 {}
-//        baidu {}
-//        wandoujia {}
     }
 
-    productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    //  批量渠道包值替换（有些第三方库中需要用到渠道名）
+    productFlavors.all { flavor ->
+        // 友盟、极光推送渠道包， UMENG_CHANNEL 是根据你AndroidManifest.xml来配置的，请看下面。
+        flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name, JPUSH_CHANNEL: name]
     }
 //    所谓ProductFlavors其实就是可定义的产品特性，
 //    配合 manifest merger 使用的时候就可以达成在一次编译过程中产生多个具有自己特性配置的版本。
 //     上面这个配置的作用就是，为每个渠道包产生不同的 UMENG_CHANNEL_VALUE 的值。
+
+    //批量重命名
+    // 输出文件配置，格式如下：app-{版本号}-{渠道名称}.apk
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def dirName = outputFile.parent // 输出文件夹所在的位置
+
+                // 文件名修改
+                def fileName = "myDemo-${defaultConfig.versionName}-${variant.flavorName}.apk"
+
+                output.outputFile = new File(dirName, fileName)
+            }
+        }
+    }
 }
 
 

@@ -32,6 +32,7 @@ import com.example.mydemo.R;
 import com.example.mydemo.util.MyToast;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * 在WebView的设计中，不是什么任务都由WebView类完成的，辅助的类完全其它辅助性的工作，WebViewy主要负责解析、渲染。
@@ -317,9 +318,10 @@ public class WebViewDemo extends AppCompatActivity {
                     Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
                     Canvas canvas = new Canvas(bmp);
                     pic.draw(canvas);
+                    FileOutputStream fos = null;
                     try {
                         String fileName = "sdcard/" + System.currentTimeMillis() + ".png";
-                        FileOutputStream fos = new FileOutputStream(fileName);
+                        fos = new FileOutputStream(fileName);
                         if (fos != null) {
                             bmp.compress(Bitmap.CompressFormat.PNG, 90, fos);
                             fos.close();
@@ -327,6 +329,12 @@ public class WebViewDemo extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "截图成功，文件名是：" + fileName, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
+                    }finally {
+                        try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
