@@ -1,4 +1,4 @@
-package com.example.mydemo.service;
+package com.example.mydemo.downloadmanager;
 
 import android.app.DownloadManager;
 import android.app.Service;
@@ -15,6 +15,8 @@ import java.io.File;
 
 /**
  * Created by ldh on 2016/8/11 0011.
+ * <p>
+ * 简书 使用DownloadManager在service中下载并安装apk
  */
 public class DownloadService extends Service {
 
@@ -42,7 +44,7 @@ public class DownloadService extends Service {
                 stopSelf();
             }
         };
-        registerReceiver(receiver,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         startDownload();
         return START_STICKY;
     }
@@ -56,7 +58,11 @@ public class DownloadService extends Service {
     private void startDownload() {
         dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse("http://d.koudai.com/com.koudai.weishop/1000f/weishop_1000f.apk"));
+        //移动网络情况下是否允许漫游
+        request.setAllowedOverRoaming(false);
+
         request.setMimeType("application/vnd.android.package-archive");
+        //设置下载的路径
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "myApp.apk");
         enqueue = dm.enqueue(request);
     }

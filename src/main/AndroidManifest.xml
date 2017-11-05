@@ -2,12 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mydemo">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 往SDCard写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 从SDCard读取数据权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 访问网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <!--建议将AndroidMannifest.xml文件android:allowBackup属性设置为false。当allowBackup未设置值
-    （默认值为true）或者标志值为true时，攻击者可通过adb backup和adb restore来备份和恢复应用程序数据。-->
+
+    <!--
+    建议将AndroidMannifest.xml文件android:allowBackup属性设置为false。当allowBackup未设置值
+    （默认值为true）或者标志值为true时，攻击者可通过adb backup和adb restore来备份和恢复应用程序数据。
+    -->
     <application
         android:name=".AppContext"
         android:allowBackup="true"
@@ -64,7 +72,7 @@
             android:name=".view.viewflipper.ViewFlipperActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name=".service.DownloadService" />
+        <service android:name=".downloadmanager.DownloadService" />
 
         <activity android:name=".rx.rxjava.RxjavaTestActivity" />
         <activity android:name=".fileprovider_client.FileProviderTestActivity" />
@@ -79,7 +87,8 @@
             android:name=".annotation.AnnotaionActivity"
             android:label="@string/title_activity_annotaion"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.dragview.DragViewactivity"></activity>
+        <activity android:name=".view.dragview.DragViewactivity" />
+        <activity android:name=".downloadmanager.AutoUpdateActivity"></activity>
     </application>
 
 </manifest>
