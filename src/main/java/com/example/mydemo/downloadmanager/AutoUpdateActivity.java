@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.mydemo.R;
-import com.ldh.androidlib.utils.DownLoadUtils;
+import com.example.mydemo.util.DownLoadUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
