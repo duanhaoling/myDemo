@@ -4,7 +4,11 @@ import com.google.auto.service.AutoService;
 
 import org.reactivestreams.Processor;
 
+
 /**
+ * Android注解快速入门和实用解析
+ * http://www.jianshu.com/p/9ca78aa4ab4d
+ *
  * @AutoService(Processor.class)，谷歌提供的自动注册注解，为你生成注册Processor所需要的格式文件（com.google.auto相关包）。
  * init(ProcessingEnvironment env)，初始化处理器，一般在这里获取我们需要的工具类。
  * getSupportedAnnotationTypes()，指定注解处理器是注册给哪个注解的，返回指定支持的注解类集合。

@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.mydemo.R;
+import com.ldh.android.javaprocessor.CustomAnnotation;
 
 import java.lang.reflect.Field;
 
@@ -18,6 +19,7 @@ public class AnnotaionActivity extends AppCompatActivity {
     @GetViewTo(R.id.fab)
     private FloatingActionButton fab;
 
+    @CustomAnnotation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

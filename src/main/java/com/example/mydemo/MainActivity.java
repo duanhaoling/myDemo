@@ -15,12 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.mydemo.base.BaseActivity;
 import com.example.mydemo.view.DialogActivity;
 import com.ldh.androidlib.adaptive.FileProvider7;
-import com.ldh.androidlib.view.dialog.demo.CommonDialogFragment;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -153,16 +151,15 @@ public class MainActivity extends BaseActivity
     private void showDialog() {
         gotoActivity(DialogActivity.class);
 
-        if (true) return;
         //这里不可以使用匿名内部类public static
-        CommonDialogFragment.createBuilder(this, getSupportFragmentManager())
-                .setTitle("hello")
-                .setMessage("hello world")
-                .setPositiveButton("yes", (dialog, which) -> {
-                    Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButton("no", null)
-                .show("test");
+//        CommonDialogFragment.createBuilder(this, getSupportFragmentManager())
+//                .setTitle("hello")
+//                .setMessage("hello world")
+//                .setPositiveButton("yes", (dialog, which) -> {
+//                    Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
+//                })
+//                .setNegativeButton("no", null)
+//                .show("test");
 
     }
 }

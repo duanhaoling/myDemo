@@ -114,7 +114,12 @@ android {
         cruncherEnabled false
     }
 
-    // Specifies a flavor dimension.
+    lintOptions {
+        abortOnError false
+    }
+
+
+/*    // Specifies a flavor dimension.
     flavorDimensions "color"
 
     //use to test flavors support
@@ -134,7 +139,7 @@ android {
     productFlavors.all { flavor ->
         // 友盟、极光推送渠道包， UMENG_CHANNEL 是根据你AndroidManifest.xml来配置的，请看下面。
         flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name, JPUSH_CHANNEL: name]
-    }
+    }*/
 //    所谓ProductFlavors其实就是可定义的产品特性，
 //    配合 manifest merger 使用的时候就可以达成在一次编译过程中产生多个具有自己特性配置的版本。
 //     上面这个配置的作用就是，为每个渠道包产生不同的 UMENG_CHANNEL_VALUE 的值。
@@ -167,7 +172,19 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
     implementation 'com.google.auto.service:auto-service:1.0-rc3'
+
+    compile files('libs/javaProcessor.jar')
+    annotationProcessor files('libs/javaProcessor.jar')
 }
-
-
-
+/**
+ * http://blog.csdn.net/industriously/article/details/53932425
+ *
+ * 最后我们创建task的依赖顺序，app:preBuild依赖我们写的processorTask,
+ * processorTask依赖 :processor:build:
+ * 意思就是processor build完成后把jar复制到app，然后在执行app:preBuild。
+ */
+task processorTask(type: Exec) {
+    commandLine 'cp', '../javaProcessor/build/libs/javaProcessor.jar', 'libs/'
+}
+//processorTask.dependsOn(':javaProcessor:build')
+//preBuild.dependsOn(processorTask)
