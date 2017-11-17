@@ -5,8 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.example.mydemo.base.BaseApplication;
 import com.example.mydemo.greendaotdemo.DaoMaster;
 import com.example.mydemo.greendaotdemo.DaoSession;
@@ -14,8 +12,6 @@ import com.facebook.stetho.Stetho;
 import com.ldh.androidlib.image.ImageLoaderManager;
 
 import org.greenrobot.greendao.database.Database;
-
-import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by ldh on 2016/3/31 0031.
@@ -34,7 +30,6 @@ public class AppContext extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         //方便数据库查看
         Stetho.initializeWithDefaults(this);
         instance = this;

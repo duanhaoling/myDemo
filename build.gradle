@@ -1,16 +1,13 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'org.greenrobot.greendao'
 
 buildscript {
     //配置gradle插件的仓库
     repositories {
         jcenter()
-        maven { url 'https://maven.fabric.io/public' }
+        google()
     }
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.21.6'
         //添加apt插件,使用注解 ，Dagger2
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
@@ -19,7 +16,7 @@ buildscript {
 repositories {
     jcenter()
     maven { url "https://jitpack.io" }
-    maven { url 'https://maven.fabric.io/public' }
+    google()
 }
 
 android {
@@ -44,7 +41,7 @@ android {
     dexOptions {
         jumboMode = true
         // here heap size give 4g i got this thing from https://groups.google.com/forum/#!topic/adt-dev/P_TLBTyFWVY
-        javaMaxHeapSize "4g"
+        javaMaxHeapSize "2g"
     }
 
     signingConfigs {
@@ -117,10 +114,20 @@ android {
         cruncherEnabled false
     }
 
+    // Specifies a flavor dimension.
+    flavorDimensions "color"
+
     //use to test flavors support
     productFlavors {
-        oppo {}
-        xiaomi {}
+        oppo {
+            // Assigns this product flavor to the 'color' flavor dimension.
+            // This step is optional if you are using only one dimension.
+            dimension "color"
+        }
+        xiaomi {
+            dimension "color"
+
+        }
     }
 
     //  批量渠道包值替换（有些第三方库中需要用到渠道名）
@@ -135,16 +142,9 @@ android {
     //批量重命名
     // 输出文件配置，格式如下：app-{版本号}-{渠道名称}.apk
     applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                def dirName = outputFile.parent // 输出文件夹所在的位置
-
-                // 文件名修改
-                def fileName = "myDemo-${defaultConfig.versionName}-${variant.flavorName}.apk"
-
-                output.outputFile = new File(dirName, fileName)
-            }
+        variant.outputs.all {
+            // 文件名修改
+            outputFileName = "myDemo-${defaultConfig.versionName}-${variant.flavorName}.apk"
         }
     }
 }
@@ -152,29 +152,22 @@ android {
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //私有库
     //    compile project(':androidlib')
-    debugCompile project(path: ':androidlib', configuration: 'debug')
-    releaseCompile project(path: ':androidlib', configuration: 'release')
-    //fabric
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
-        transitive = true;
-    }
-    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.6@aar') {
-        transitive = true;
-    }
-    compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.google.auto.service:auto-service:1.0-rc3'
-    testCompile 'junit:junit:4.12'
+    //    debugCompile project(path: ':androidlib', configuration: 'debug')
+    //    releaseCompile project(path: ':androidlib', configuration: 'release')
+    implementation project(':androidlib')
+    implementation 'de.hdodenhof:circleimageview:2.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:multidex:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    //butterknife
+    implementation 'com.jakewharton:butterknife:7.0.1'
+    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.google.auto.service:auto-service:1.0-rc3'
 }
-//fabric
-crashlytics {
-    enableNdk true
-    androidNdkOut 'src/main/obj'
-    androidNdkLibsOut 'src/main/libs'
-}
+
 
 
