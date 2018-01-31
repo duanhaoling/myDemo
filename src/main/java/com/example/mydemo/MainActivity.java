@@ -18,6 +18,7 @@ import android.view.View;
 
 import com.example.mydemo.base.BaseActivity;
 import com.example.mydemo.view.DialogActivity;
+import com.example.mydemo.view.recycledemo.RecyclerDemoActivity;
 import com.ldh.androidlib.adaptive.FileProvider7;
 
 import java.io.File;
@@ -40,7 +41,6 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         initView();
     }
-
 
     private void initView() {
         //初始化toolbar
@@ -115,8 +115,8 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_camera) {
             takePhotoNoCompress();
-
         } else if (id == R.id.nav_gallery) {
+            gotoActivity(RecyclerDemoActivity.class);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -133,6 +133,9 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
+    /**
+     * 测试7.0适配 FileProvider
+     */
     private void takePhotoNoCompress() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -141,6 +144,7 @@ public class MainActivity extends BaseActivity
             File file = new File(Environment.getExternalStorageDirectory(), filename);
             mCurrentPhotoPath = file.getAbsolutePath();
 
+//            Uri fileUri = Uri.fromFile(file);
             Uri fileUri = FileProvider7.getUriForFile(this, file);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
             startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);

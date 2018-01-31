@@ -11,6 +11,7 @@
     <script type="text/javascript">
     var result = JavaScriptInterface.jsontohtml();
     var obj = eval("("+result+")");//解析json字符串
+
     function showAndroidToast(toast)
     {
         JavaScriptInterface.showToast(toast);
@@ -27,12 +28,17 @@
                 document.write("<p>PhoneNum:"+user.address+"</p>");
             }
         }
+        showAndroidToast(result);
     }
     function list(){
         document.write("<div data-role='header'><p>another</p></div>");
     }
     function changeColor(color){
         document.body.style.backgroundColor = color ;
+    }
+
+    function getSafePayParam(){
+        return "hello,java,I am from JS";
     }
 
     </script>
@@ -59,12 +65,21 @@
             <script>document.write("<p>address:"+obj[0].address+"</p>");</script>
         </p>
     </div>
+    <div data-role="collapsible" data-theme="c" data-content-theme="f">
+        <h1 onclick="window.demo.setJsonParamFromJS(getSafePayParam())">window.demo.setJsonParamFromJS</h1>
+        <a href="getJsonParams://jdalfaflsll">click to get jsonString from JS</a>
+    </div>
+
+
 
     <div data-role="content">
+
+
         <h2 value="say hello" onclick="showAndroidToast('Hello,Android!')" data-theme="e">say
             hello</h2>
         <button value="get json data" onclick="getjsonData()" data-theme="e">get json data</button>
     </div><!-- /content -->
+
 
     <!--url拦截-->
     <div data-role="footer" data-theme="c">

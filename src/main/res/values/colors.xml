@@ -7,8 +7,8 @@
     <color name="window_background">#EBEBEB</color>
     <color name="main_gray">#9A9A9A</color>
     <color name="text_color_gray">#999999</color>
-    <color name="ajkLineColor">#C7C7CC</color>
-    <color name="ajkMediumGrayColor">#969696</color>
+    <color name="lineColor">#C7C7CC</color>
+    <color name="mediumGrayColor">#969696</color>
     <color name="translucence">#88000000</color>
     <color name="transparent">#000</color>
     <color name="text_color_black">#333333</color>

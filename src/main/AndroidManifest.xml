@@ -23,12 +23,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<meta-data-->
-            <!--android:name="io.fabric.ApiKey"-->
-            <!--android:value="${fabric_apikey}" />-->
-        <!--<meta-data-->
-            <!--android:name="UMENG_CHANNEL"-->
-            <!--android:value="${UMENG_CHANNEL_VALUE}" />-->
+
+        <!-- <meta-data -->
+        <!-- android:name="io.fabric.ApiKey" -->
+        <!-- android:value="${fabric_apikey}" /> -->
+        <!-- <meta-data -->
+        <!-- android:name="UMENG_CHANNEL" -->
+        <!-- android:value="${UMENG_CHANNEL_VALUE}" /> -->
 
         <receiver android:name=".remoteview.MyAppWidgetProvider">
             <meta-data
@@ -88,7 +89,8 @@
             android:label="@string/title_activity_annotaion"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.dragview.DragViewactivity" />
-        <activity android:name=".downloadmanager.AutoUpdateActivity"></activity>
+        <activity android:name=".downloadmanager.AutoUpdateActivity" />
+        <activity android:name=".view.recycledemo.RecyclerDemoActivity"></activity>
     </application>
 
 </manifest>

@@ -27,8 +27,8 @@ android {
 
     defaultConfig {
         applicationId 'com.ldh.mydemo'
-        minSdkVersion 16
-        targetSdkVersion 24
+        minSdkVersion 21
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -117,7 +117,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
 
 /*    // Specifies a flavor dimension.
     flavorDimensions "color"

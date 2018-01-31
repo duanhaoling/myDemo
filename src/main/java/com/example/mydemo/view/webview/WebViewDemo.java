@@ -5,16 +5,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Picture;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -128,13 +125,24 @@ public class WebViewDemo extends AppCompatActivity {
                 }
             }
 
+            @JavascriptInterface
+            @Override
+            public void setJsonParamFromJS(String jsonString) {
+                Toast.makeText(WebViewDemo.this, jsonString, Toast.LENGTH_SHORT).show();
+            }
+
+
         }, "demo");
+
     }
 
     public interface JavaScriptInter {
         void onJsCallAndroid();
 
         void callAndroidMethod(int a, float b, String c, boolean d);
+
+        void setJsonParamFromJS(String jsonString);
+
     }
 
     private void initActionBar() {
@@ -156,23 +164,33 @@ public class WebViewDemo extends AppCompatActivity {
     // 创建WebViewClient对象
     WebViewClient wvc = new WebViewClient() {
 
+        // 在点击请求的是链接是才会调用，重写此方法返回true表明点击网页里面的链接还是在当前的webview里跳转，
+        // 不跳到浏览器那边。这个函数我们可以做很多操作，比如我们读取到某些特殊的URL，
+        // 于是就可以不打开地址，取消这个操作，进行预先定义的其他操作，这对一个程序是非常必要的。
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//            MyToast.showtoast(WebViewDemo.this, "WebViewClient.shouldOverrideUrlLoading");
-//            if (!TextUtils.isEmpty(url) && url.startsWith("call-app-method://clickShareButton")) {
-//                Toast.makeText(WebViewDemo.this, url, Toast.LENGTH_SHORT).show();
-//                return true;
-//            }
+            MyToast.showtoast(WebViewDemo.this, "WebViewClient.shouldOverrideUrlLoading");
+            if (!TextUtils.isEmpty(url) && url.startsWith("call-app-method://clickShareButton")) {
+                Toast.makeText(WebViewDemo.this, url, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            //定义的协议在这里是没有大写的
+            if (url.startsWith("getjsonparams")) {
+                wv.loadUrl("javascript:window.demo.setJsonParamFromJS(getSafePayParam())");
+                return true;
+            }
+
             if (url.startsWith("http:") || url.startsWith("https:")) {
                 return false;
             }
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
-            // 使用自己的WebView组件来响应Url加载事件，而不是使用默认浏览器器加载页面
-            //  下面这一行保留的时候，原网页仍报错，新网页正常.所以注释掉后，也就没问题了
-            //   view.loadUrl(url);
-            // 记得消耗掉这个事件。给不知道的朋友再解释一下，Android中返回True的意思就是到此为止吧,事件就会不会冒泡传递了，我们称之为消耗掉
-            return true;
+//            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//            startActivity(intent);
+//            // 使用自己的WebView组件来响应Url加载事件，而不是使用默认浏览器器加载页面
+//            //  下面这一行保留的时候，原网页仍报错，新网页正常.所以注释掉后，也就没问题了
+//            //   view.loadUrl(url);
+//            // 记得消耗掉这个事件。给不知道的朋友再解释一下，Android中返回True的意思就是到此为止吧,事件就会不会冒泡传递了，我们称之为消耗掉
+//            return true;
+            return super.shouldOverrideUrlLoading(view, url);
         }
 
     };
@@ -184,7 +202,8 @@ public class WebViewDemo extends AppCompatActivity {
         public void onProgressChanged(WebView view, int newProgress) {
             MyToast.showtoast(WebViewDemo.this, "正在加载中");
             if (newProgress == 100) {
-                handler.sendEmptyMessage(1);// 如果全部载入,隐藏进度对话框
+                // 如果全部载入,隐藏进度对话框
+//                handler.sendEmptyMessage(1);
             }
             super.onProgressChanged(view, newProgress);
         }
@@ -260,21 +279,24 @@ public class WebViewDemo extends AppCompatActivity {
         }
     };
 
-    private static Handler handler = new Handler() {
-        public void handleMessage(Message msg) {// 定义一个Handler，用于处理下载线程与UI间通讯
-            if (!Thread.currentThread().isInterrupted()) {
-                switch (msg.what) {
-                    case 0:
-//                        pd.show();// 显示进度对话框
-                        break;
-                    case 1:
+//    private Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {// 定义一个Handler，用于处理下载线程与UI间通讯
+//            if (!Thread.currentThread().isInterrupted()) {
+//                switch (msg.what) {
+//                    case 0:
+////                        pd.show();// 显示进度对话框
+//                        break;
+//                    case 1:
 //                        pd.hide();// 隐藏进度对话框，不可使用dismiss()、cancel(),否则再次调用show()时，显示的对话框小圆圈不会动。
-                        break;
-                }
-            }
-            super.handleMessage(msg);
-        }
-    };
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//            super.handleMessage(msg);
+//        }
+//    };
 
     private void initEvents() {
         b1.setOnClickListener(new View.OnClickListener() {
@@ -286,6 +308,7 @@ public class WebViewDemo extends AppCompatActivity {
 //                wv.loadUrl("http://www.baidu.com");
                 String color = "#00ee00";
                 wv.loadUrl("Javascript:changeColor('" + color + "');");
+
             }
 
         });
@@ -299,7 +322,10 @@ public class WebViewDemo extends AppCompatActivity {
 // 加载URL assets目录下的内容可以用 "[url=file:///android_asset]file:///android_asset[/url]" 前缀
 
 //                wv.loadUrl("[url=file:///android_asset/html/test3.html]file:///android_asset/html/test3.html[/url]");
-                wv.loadUrl("http://www.sina.com");
+//                wv.loadUrl("http://www.sina.com");
+
+                wv.loadUrl("javascript:window.demo.setJsonParamFromJS( getSafePayParam() )");
+
             }
 
         });
@@ -329,7 +355,7 @@ public class WebViewDemo extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "截图成功，文件名是：" + fileName, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
-                    }finally {
+                    } finally {
                         try {
                             fos.close();
                         } catch (IOException e) {
