@@ -127,7 +127,7 @@
         android:layout_height="@dimen/image_width"
         android:layout_gravity="center"
         android:src="@drawable/small"
-        app:layout_behavior="com.example.mydemo.material.AvatarImageBehavior" />
+        app:layout_behavior="com.example.mydemo.view.material.AvatarImageBehavior" />
 
     <!--app:border_width="2dp"-->
         <!--app:border_color="@android:color/white"-->

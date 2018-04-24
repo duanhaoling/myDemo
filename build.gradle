@@ -162,9 +162,10 @@ dependencies {
     //    debugCompile project(path: ':androidlib', configuration: 'debug')
     //    releaseCompile project(path: ':androidlib', configuration: 'release')
     implementation project(':androidlib')
+
     implementation 'de.hdodenhof:circleimageview:2.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:multidex:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
     testImplementation 'junit:junit:4.12'
     //butterknife
     implementation 'com.jakewharton:butterknife:7.0.1'
