@@ -20,15 +20,15 @@ repositories {
 }
 
 android {
-    compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    compileSdkVersion aversion.compileSdkVersion
+    buildToolsVersion aversion.buildToolsVersion
 
 //    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId 'com.ldh.mydemo'
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion aversion.minSdkVersion
+        targetSdkVersion aversion.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -170,8 +170,9 @@ dependencies {
     //butterknife
     implementation 'com.jakewharton:butterknife:7.0.1'
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
-    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
-    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+
+//    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
+//    implementation 'com.google.auto.service:auto-service:1.0-rc3'
 
     compile files('libs/javaProcessor.jar')
     annotationProcessor files('libs/javaProcessor.jar')

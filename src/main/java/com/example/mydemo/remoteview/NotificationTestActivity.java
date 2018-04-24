@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RemoteViews;
@@ -89,7 +88,7 @@ public class NotificationTestActivity extends AppCompatActivity {
                 .setContentText("text text")
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(pendingIntent)
                 .build();
         manager.notify(1, notification);
@@ -107,7 +106,7 @@ public class NotificationTestActivity extends AppCompatActivity {
                 .setTicker("hello world")
                 .setWhen(System.currentTimeMillis())
                 .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setDefaults(Notification.DEFAULT_ALL)
                 .setContentIntent(pendingIntent)
                 .build();
         notification.contentView = remoteViews;
