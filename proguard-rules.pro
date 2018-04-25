@@ -202,7 +202,7 @@ public static java.lang.String TABLENAME;
 #}
 
 #ImageLoader的实现类
--keep class * implements com.anjuke.android.newbroker.manager.imageloader.ImageLoader
+
 #rules for fresco
 -dontwarn javax.annotation.**
 
