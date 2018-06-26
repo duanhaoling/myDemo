@@ -24,4 +24,7 @@
     <color name="dark_green">#669900</color>
     <color name="dark_red">#CC0000</color>
     <color name="dark_yellow">#FF8A00</color>
+
+    <color name="grid_state_pressed">#BBdddddd</color>
+    <color name="grid_state_focused">#777dbcd3</color>
 </resources>

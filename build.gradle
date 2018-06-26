@@ -174,7 +174,7 @@ dependencies {
 //    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc3'
 //    implementation 'com.google.auto.service:auto-service:1.0-rc3'
 
-    compile files('libs/javaProcessor.jar')
+    implementation files('libs/javaProcessor.jar')
     annotationProcessor files('libs/javaProcessor.jar')
 }
 /**
