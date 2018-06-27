@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.mydemo.base.BaseActivity;
+import com.example.mydemo.mobile.PackageManagerActivity;
 import com.example.mydemo.view.DialogActivity;
 import com.example.mydemo.view.recycledemo.RecyclerDemoActivity;
 import com.ldh.androidlib.adaptive.FileProvider7;
@@ -44,11 +45,11 @@ public class MainActivity extends BaseActivity
 
     private void initView() {
         //初始化toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //初始化悬浮按钮
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,19 +58,19 @@ public class MainActivity extends BaseActivity
             }
         });
         //初始化侧边栏
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -116,7 +117,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.nav_camera) {
             takePhotoNoCompress();
         } else if (id == R.id.nav_gallery) {
-            gotoActivity(RecyclerDemoActivity.class);
+            gotoActivity(PackageManagerActivity.class);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -125,7 +126,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
+            gotoActivity(RecyclerDemoActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -151,6 +152,13 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_TAKE_PHOTO) {
+//            Toast.makeText(this, data , Toast.LENGTH_LONG);
+        }
+    }
 
     private void showDialog() {
         gotoActivity(DialogActivity.class);

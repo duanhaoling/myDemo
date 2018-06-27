@@ -91,7 +91,8 @@
         <activity android:name=".view.dragview.DragViewactivity" />
         <activity android:name=".downloadmanager.AutoUpdateActivity" />
         <activity android:name=".view.recycledemo.RecyclerDemoActivity" />
-        <activity android:name=".image_picker.ImageGridActivity"></activity>
+        <activity android:name=".image_picker.ImageGridActivity" />
+        <activity android:name=".mobile.PackageManagerActivity"></activity>
     </application>
 
 </manifest>
