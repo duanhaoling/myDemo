@@ -21,7 +21,16 @@ import com.example.mydemo.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * 从相册选择图片页-文件夹
+ *
+ * The main fragment that powers the ImageGridActivity screen. Fairly straight
+ * forward GridView implementation with the key addition being the ImageWorker
+ * class w/ImageCache to load children asynchronously, keeping the UI nice and
+ * smooth and caching thumbnails for quick retrieval. The cache is retained over
+ * configuration changes like orientation change so the images are populated
+ * quickly if, for example, the user rotates the device.
+ */
 public class ImageFolderGridFragment extends Fragment {
     private ImageAdapter mAdapter;
     private SelectFolderListener mListener;

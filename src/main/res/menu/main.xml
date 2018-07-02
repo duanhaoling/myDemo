@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/action_settings"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_manage"
             android:orderInCategory="100"
             android:title="@string/action_settings"
             app:showAsAction="withText|always" />

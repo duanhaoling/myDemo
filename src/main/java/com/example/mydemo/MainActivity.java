@@ -16,11 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.mydemo.base.BaseActivity;
 import com.example.mydemo.mobile.PackageManagerActivity;
 import com.example.mydemo.view.DialogActivity;
 import com.example.mydemo.view.recycledemo.RecyclerDemoActivity;
 import com.ldh.androidlib.adaptive.FileProvider7;
+import com.ldh.androidlib.base.BaseActivity;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
+            gotoActivity(MediaCenterActivity.class);
         }
 
         if (id == R.id.nav_share) {
@@ -107,6 +107,7 @@ public class MainActivity extends BaseActivity
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
