@@ -33,6 +33,9 @@
         <!-- <meta-data -->
         <!-- android:name="UMENG_CHANNEL" -->
         <!-- android:value="${UMENG_CHANNEL_VALUE}" /> -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e6c6ff9086549350c2f37ca72a48653b1e08e79c" />
 
         <receiver android:name=".remoteview.MyAppWidgetProvider">
             <meta-data
@@ -99,6 +102,7 @@
         <activity android:name=".MediaCenterActivity"></activity>
         <activity android:name=".image_picker.ImageGridActivity" />
         <activity android:name=".image_picker.clip.ClipActivity"/>
+
     </application>
 
 </manifest>
