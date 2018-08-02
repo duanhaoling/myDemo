@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.mydemo.R;
 import com.example.mydemo.rx.rxjava.bean.Employee;
 import com.example.mydemo.databinding.ActivityRxjavaTestBinding;
-import com.example.mydemo.util.LogUtil;
+import com.ldh.androidlib.utils.LogUtil;
 import com.example.mydemo.util.MyToast;
 
 import java.io.IOException;

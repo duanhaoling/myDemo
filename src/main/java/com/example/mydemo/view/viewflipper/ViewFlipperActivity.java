@@ -22,6 +22,8 @@ public class ViewFlipperActivity extends AppCompatActivity {
 
     private void initView() {
         viewFlipper = (ViewFlipper) findViewById(R.id.viewFlipper);
+        viewFlipper.setFlipInterval(1000);
+        viewFlipper.setAutoStart(true);
     }
 
     @Override

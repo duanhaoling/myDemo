@@ -97,12 +97,11 @@
         <activity android:name=".view.dragview.DragViewactivity" />
         <activity android:name=".downloadmanager.AutoUpdateActivity" />
         <activity android:name=".view.recycledemo.RecyclerDemoActivity" />
-
         <activity android:name=".mobile.PackageManagerActivity" />
-        <activity android:name=".MediaCenterActivity"></activity>
+        <activity android:name=".MediaCenterActivity" />
         <activity android:name=".image_picker.ImageGridActivity" />
-        <activity android:name=".image_picker.clip.ClipActivity"/>
-
+        <activity android:name=".image_picker.clip.ClipActivity" />
+        <activity android:name=".viewpager.ViewPagerGuideActivity"></activity>
     </application>
 
 </manifest>

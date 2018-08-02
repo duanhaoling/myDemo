@@ -25,6 +25,7 @@ import com.example.mydemo.view.timer.TimerDemoActivity;
 import com.example.mydemo.view.viewflipper.ViewFlipperActivity;
 import com.example.mydemo.view.webview.WebViewDemo;
 import com.example.mydemo.view.webview.WebViewDemo2;
+import com.example.mydemo.viewpager.ViewPagerGuideActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +51,9 @@ public class MyListFragment extends ListFragment {
             "FileProviderTest",
             "RxjavaTest",
             "DatabaseTest",
-            "优雅实现拖拽填空题"
+            "优雅实现拖拽填空题",
+            "viewPager展示图片",
+            "viewFlipper展示图片"
     };
 
 
@@ -118,6 +121,12 @@ public class MyListFragment extends ListFragment {
                 break;
             case 13:
                 gotoActivity(DragViewactivity.class);
+                break;
+            case 14:
+                gotoActivity(ViewPagerGuideActivity.class);
+                break;
+            case 15:
+                gotoActivity(ViewFlipperActivity.class);
                 break;
             default:
                 break;

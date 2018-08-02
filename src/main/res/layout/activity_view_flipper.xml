@@ -59,7 +59,7 @@
                 android:scaleType="centerCrop"
                 android:src="@mipmap/a1" />
         </LinearLayout>
-        <!-- 第四个页面 -->
+        <!-- 第五个页面 -->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
